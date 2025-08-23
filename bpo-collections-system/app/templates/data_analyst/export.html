@@ -4,83 +4,97 @@
 
 {% block content %}
 <div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">Export Payment Records</h5>
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Export Data</h5>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ url_for('data_analyst.generate_export') }}">
-            {{ form.hidden_tag() }}
+        <form method="POST" action="{{ url_for('data_analyst.export_data') }}">
+            {{ form.csrf_token }}
+            
+            <!-- Fixed Export Type Radio Buttons -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Export Type</label>
+                <div>
+                    {% for subfield in form.export_type %}
+                    <div class="form-check form-check-inline">
+                        {{ subfield(class="form-check-input") }}
+                        {{ subfield.label(class="form-check-label") }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
             
             <div class="row">
+                <!-- Campaign dropdown (only for Campaign Data) -->
+                <div class="col-md-12 mb-3" id="campaignField">
+                    {{ form.campaign.label(class="form-label") }}
+                    {{ form.campaign(class="form-select") }}
+                </div>
+                
+                <!-- Date Range -->
                 <div class="col-md-6 mb-3">
-                    <h6>Export Type</h6>
+                    {{ form.start_date.label(class="form-label") }}
+                    {{ form.start_date(class="form-control", type="date") }}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    {{ form.end_date.label(class="form-label") }}
+                    {{ form.end_date(class="form-control", type="date") }}
+                </div>
+                
+                <!-- Include Headers Option -->
+                <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        {{ form.export_type(class="form-check-input") }}
-                        {{ form.export_type.label(class="form-check-label") }}
+                        {{ form.include_headers(class="form-check-input") }}
+                        {{ form.include_headers.label(class="form-check-label") }}
                     </div>
                 </div>
             </div>
             
-            <div id="campaignSection" class="row mb-3">
-                <div class="col-md-6">
-                    {{ form.campaign.label(class="form-label") }}
-                    {{ form.campaign(class="form-select") }}
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    {{ form.start_date.label(class="form-label") }}
-                    {{ form.start_date(class="form-control") }}
-                </div>
-                <div class="col-md-6 mb-3">
-                    {{ form.end_date.label(class="form-label") }}
-                    {{ form.end_date(class="form-control") }}
-                </div>
-            </div>
-            
-            <div class="mb-3">
-                {{ form.include_headers(class="form-check-input") }}
-                {{ form.include_headers.label(class="form-check-label") }}
-            </div>
-            
-            <div class="mb-3">
-                {{ form.submit(class="btn btn-primary") }}
-            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-file-earmark-arrow-down"></i> Generate Export
+            </button>
         </form>
     </div>
 </div>
 
 <div class="card mt-4">
-    <div class="card-header">
+    <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Export History</h5>
     </div>
     <div class="card-body">
         {% if export_history %}
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <th>#</th>
                         <th>Type</th>
                         <th>Campaign</th>
                         <th>Date Range</th>
-                        <th>Records</th>
-                        <th>Exported By</th>
-                        <th>Actions</th>
+                        <th>Record Count</th>
+                        <th>Created By</th>
+                        <th>Created At</th>
+                        <th>File</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for export in export_history %}
+                    {% for record in export_history %}
                     <tr>
-                        <td>{{ export.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                        <td>{{ export.export_type }}</td>
-                        <td>{{ export.campaign or 'All' if export.export_type == 'campaign' else 'N/A' }}</td>
-                        <td>{{ export.start_date }} to {{ export.end_date }}</td>
-                        <td>{{ export.record_count }}</td>
-                        <td>{{ export.created_by }}</td>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.export_type|title }}</td>
+                        <td>{{ record.campaign or 'All' }}</td>
                         <td>
-                            <a href="{{ url_for('data_analyst.download_export', export_id=export.id) }}" class="btn btn-sm btn-primary">
+                            {% if record.start_date %}{{ record.start_date.strftime('%Y-%m-%d') }}{% else %}All{% endif %}
+                            to 
+                            {% if record.end_date %}{{ record.end_date.strftime('%Y-%m-%d') }}{% else %}All{% endif %}
+                        </td>
+                        <td>{{ record.record_count }}</td>
+                        <td>{{ record.created_by }}</td>
+                        <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <a href="{{ url_for('data_analyst.download_export', filename=record.filename) }}" 
+                               class="btn btn-sm btn-primary">
                                 <i class="bi bi-download"></i> Download
                             </a>
                         </td>
@@ -90,7 +104,9 @@
             </table>
         </div>
         {% else %}
-        <div class="alert alert-info">No export history found.</div>
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No export history found.
+        </div>
         {% endif %}
     </div>
 </div>
@@ -99,24 +115,35 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const exportTypeRadios = document.querySelectorAll('input[name="export_type"]');
-        const campaignSection = document.getElementById('campaignSection');
+        // Show/hide campaign field based on export type
+        const exportTypeInputs = document.getElementsByName('export_type');
+        const campaignField = document.getElementById('campaignField');
         
-        function toggleCampaignSection() {
-            const selectedValue = document.querySelector('input[name="export_type"]:checked').value;
-            if (selectedValue === 'campaign') {
-                campaignSection.style.display = 'flex';
+        function updateFormFields() {
+            // Get selected export type
+            let selectedType;
+            for (const input of exportTypeInputs) {
+                if (input.checked) {
+                    selectedType = input.value;
+                    break;
+                }
+            }
+            
+            // Show/hide campaign field based on export type
+            if (selectedType === 'dispute') {
+                campaignField.style.display = 'none';
             } else {
-                campaignSection.style.display = 'none';
+                campaignField.style.display = 'block';
             }
         }
         
-        exportTypeRadios.forEach(radio => {
-            radio.addEventListener('change', toggleCampaignSection);
-        });
+        // Add change event listeners
+        for (const input of exportTypeInputs) {
+            input.addEventListener('change', updateFormFields);
+        }
         
         // Initialize on page load
-        toggleCampaignSection();
+        updateFormFields();
     });
 </script>
 {% endblock %}

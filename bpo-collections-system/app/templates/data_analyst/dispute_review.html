@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Dispute Review - BPO Collections System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Disputes Pending Final Verification</h5>
+        <span class="badge bg-light text-dark">{{ disputes|length }} pending</span>
+    </div>
+    <div class="card-body">
+        {% if disputes %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Campaign</th>
+                        <th>Loan ID</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <!-- Move operator column higher in the list and highlight -->
+                        <th class="bg-light">Operator</th>
+                        <th>Reason</th>
+                        <th>Team Leader</th>
+                        <th>Approved On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dispute in disputes %}
+                    <tr>
+                        <td>{{ dispute.id }}</td>
+                        <td>{{ dispute.payment_record.campaign }}</td>
+                        <td>{{ dispute.payment_record.loan_id }}</td>
+                        <td>{{ dispute.payment_record.customer_name }}</td>
+                        <td>{{ dispute.payment_record.amount }}</td>
+                        <!-- Highlight operator name with styling -->
+                        <td class="bg-light fw-bold">{{ dispute.payment_record.operator_name }}</td>
+                        <td>{{ dispute.reason }}</td>
+                        <td>{{ dispute.validated_by }}</td>
+                        <td>{{ dispute.validated_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#reviewModal"
+                                    data-dispute-id="{{ dispute.id }}"
+                                    data-action="approve">
+                                <i class="bi bi-check-lg"></i> Verify
+                            </button>
+                            <button class="btn btn-sm btn-warning" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#reviewModal"
+                                    data-dispute-id="{{ dispute.id }}"
+                                    data-action="reject">
+                                <i class="bi bi-arrow-left"></i> Return
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" class="border-top-0 pt-0">
+                            <div class="ps-4">
+                                <strong>Corrected Details:</strong>
+                                <p class="mb-1">{{ dispute.corrected_details }}</p>
+                                
+                                <strong>Team Leader Comments:</strong>
+                                <p class="mb-1">{{ dispute.validation_comments or 'No comments provided' }}</p>
+                                
+                                <!-- Show proofs if available - with source parameter -->
+                                {% if dispute.payment_record.proofs|length > 0 %}
+                                <a href="{{ url_for('team_leader.record_proofs', record_id=dispute.payment_record.id, source='dispute_review') }}" 
+                                   class="btn btn-sm btn-info">
+                                    <i class="bi bi-images"></i> View Payment Proof ({{ dispute.payment_record.proofs|length }})
+                                </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table-divider"><td colspan="10" class="p-0 border-bottom"></td></tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="10" class="text-center">No disputes pending verification</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No disputes pending your verification.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Filter by Operator Section -->
+<div class="card mt-4">
+    <div class="card-header bg-light">
+        <h6 class="mb-0">Filter by Operator</h6>
+    </div>
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('data_analyst.dispute_review') }}" class="row g-2">
+            <div class="col-md-4">
+                <select name="operator" class="form-select">
+                    <option value="">All Operators</option>
+                    {% for operator in operators %}
+                    <option value="{{ operator }}" {% if request.args.get('operator') == operator %}selected{% endif %}>
+                        {{ operator }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                {% if request.args.get('operator') %}
+                <a href="{{ url_for('data_analyst.dispute_review') }}" class="btn btn-outline-secondary">Clear</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Dispute Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Review Dispute</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="reviewForm" method="POST" action="{{ url_for('data_analyst.dispute_review') }}">
+                <div class="modal-body">
+                    <input type="hidden" id="dispute_id" name="dispute_id">
+                    <input type="hidden" id="action" name="action">
+                    
+                    <div class="mb-3">
+                        <label for="comments" class="form-label">Comments</label>
+                        <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+                    
+                    <div id="verifyMessage" class="alert alert-success d-none">
+                        <i class="bi bi-check-circle"></i> You're about to verify and finalize this dispute.
+                    </div>
+                    
+                    <div id="returnMessage" class="alert alert-warning d-none">
+                        <i class="bi bi-exclamation-circle"></i> You're about to return this dispute to Team Leader for reconsideration.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize review modal
+        const reviewModal = document.getElementById('reviewModal');
+        const verifyMessage = document.getElementById('verifyMessage');
+        const returnMessage = document.getElementById('returnMessage');
+        
+        reviewModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const disputeId = button.getAttribute('data-dispute-id');
+            const action = button.getAttribute('data-action');
+            
+            // Update form fields
+            document.getElementById('dispute_id').value = disputeId;
+            document.getElementById('action').value = action;
+            
+            // Show appropriate message
+            if (action === 'approve') {
+                verifyMessage.classList.remove('d-none');
+                returnMessage.classList.add('d-none');
+                reviewModal.querySelector('.modal-title').textContent = 'Verify Dispute';
+                reviewModal.querySelector('button[type="submit"]').className = 'btn btn-success';
+            } else {
+                verifyMessage.classList.add('d-none');
+                returnMessage.classList.remove('d-none');
+                reviewModal.querySelector('.modal-title').textContent = 'Return Dispute';
+                reviewModal.querySelector('button[type="submit"]').className = 'btn btn-warning';
+            }
+        });
+    });
+</script>
+
+<!-- Add table divider style -->
+<style>
+    .table-divider td {
+        border-bottom: 2px solid #dee2e6;
+        padding-top: 0.5rem;
+    }
+</style>
+{% endblock %}

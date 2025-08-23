@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, IntegerField, FloatField, DateField, TextAreaField, BooleanField, SubmitField, RadioField
 from wtforms.validators import DataRequired, Length, NumberRange, Optional
 from flask_wtf.file import FileField, FileAllowed, MultipleFileField
+from app.models import PaymentRecord  # Add this import
+from sqlalchemy.orm import joinedload  # Add this import
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(max=80)])
@@ -69,12 +71,15 @@ class CampaignFilterForm(FlaskForm):
     submit = SubmitField('Apply Filters')
 
 class ExportForm(FlaskForm):
-    export_type = RadioField('Export Type', choices=[('campaign', 'By Campaign'), ('disputes', 'Validated Disputes')], default='campaign', validators=[DataRequired()])
+    export_type = RadioField('Export Type', 
+                           choices=[('campaign', 'Campaign Data'), ('dispute', 'Validated Disputes')], 
+                           default='campaign', 
+                           validators=[DataRequired()])
     campaign = SelectField('Campaign', choices=[], validators=[Optional()])
-    start_date = DateField('Start Date', validators=[Optional()])
-    end_date = DateField('End Date', validators=[Optional()])
+    start_date = DateField('Start Date', format='%Y-%m-%d', validators=[Optional()])
+    end_date = DateField('End Date', format='%Y-%m-%d', validators=[Optional()])
     include_headers = BooleanField('Include Headers', default=True)
-    submit = SubmitField('Export')
+    submit = SubmitField('Export Data')
 
 class PaymentRecordSearchForm(FlaskForm):
     campaign = SelectField('Campaign', choices=[], validators=[Optional()])
@@ -84,3 +89,10 @@ class PaymentRecordSearchForm(FlaskForm):
     date_from = DateField('Date From', format='%Y-%m-%d', validators=[Optional()])
     date_to = DateField('Date To', format='%Y-%m-%d', validators=[Optional()])
     submit = SubmitField('Search')
+
+    def __init__(self, *args, **kwargs):
+        super(PaymentRecordSearchForm, self).__init__(*args, **kwargs)
+        # Set choices dynamically when form is instantiated
+        self.campaign.choices = [('', 'All Campaigns')] + [
+            (c[0], c[0]) for c in PaymentRecord.query.with_entities(PaymentRecord.campaign).distinct().all() if c[0]
+        ]

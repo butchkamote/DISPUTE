@@ -6,8 +6,13 @@
 <div class="card">
     <div class="card-header bg-primary text-white">
         <h5 class="mb-0">
-            Payment Proofs for {{ payment.campaign }} - {{ payment.loan_id }}
-            <a href="{{ url_for('team_leader.data_entry') }}" class="btn btn-sm btn-light float-end">Back</a>
+            Payment Proofs
+            <!-- Use the source parameter for the back button -->
+            {% if source == 'dispute_review' %}
+                <a href="{{ url_for('data_analyst.dispute_review') }}" class="btn btn-sm btn-light float-end">Back</a>
+            {% else %}
+                <a href="{{ url_for('team_leader.data_entry') }}" class="btn btn-sm btn-light float-end">Back</a>
+            {% endif %}
         </h5>
     </div>
     <div class="card-body">

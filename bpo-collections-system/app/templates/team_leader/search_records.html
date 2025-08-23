@@ -97,11 +97,9 @@
                         <td>{{ record.operator_name }}</td>
                         <td>{{ record.dpd }}</td>
                         <td>
-                            {% if record.proof_image_path %}
-                                <a href="{{ url_for('team_leader.view_proof', record_id=record.id) }}" 
-                                   class="btn btn-sm btn-info" 
-                                   target="_blank">
-                                    <i class="bi bi-eye"></i> View
+                            {% if record.proofs|length > 0 %}
+                                <a href="{{ url_for('team_leader.record_proofs', record_id=record.id) }}" class="btn btn-sm btn-info">
+                                    <i class="bi bi-images"></i> View ({{ record.proofs|length }})
                                 </a>
                             {% else %}
                                 <span class="badge bg-secondary">No proof</span>

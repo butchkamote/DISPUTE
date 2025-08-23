@@ -1,11 +1,12 @@
-from flask import Blueprint, render_template, request, send_file, flash, redirect, url_for
+from flask import Blueprint, request, render_template, redirect, url_for, flash, send_file, send_from_directory
 from flask_login import login_required, current_user
 from app.models import PaymentRecord, Dispute, ExportHistory
+from app import db
+from datetime import datetime, timedelta
+from sqlalchemy import func, and_, or_
+from sqlalchemy.orm import joinedload  # Add this import
+from app.utils.export_helpers import export_campaign_data, export_dispute_data
 from app.forms import CampaignFilterForm, ExportForm
-from app.utils.export_helpers import export_to_csv
-import pandas as pd
-from datetime import datetime
-import os
 
 # Single blueprint definition with a url_prefix
 bp = Blueprint('data_analyst', __name__, url_prefix='/data-analyst')
@@ -92,6 +93,13 @@ def export_data():
         flash('Access denied: Data Analyst role required', 'danger')
         return redirect(url_for('main.index'))
     
+    # Import necessary modules
+    import pandas as pd
+    import os
+    from flask import current_app
+    from app.utils.export_helpers import export_campaign_data, export_dispute_data
+    from app.forms import ExportForm  # Add this import
+    
     form = ExportForm()
     
     # Get all campaigns for the dropdown
@@ -106,36 +114,15 @@ def export_data():
         include_headers = form.include_headers.data
         
         try:
-            # Build query based on export type
+            # Use helper functions for export
             if export_type == 'campaign':
-                records = PaymentRecord.query
-                if campaign:
-                    records = records.filter_by(campaign=campaign)
-                filename = f"{campaign or 'all'}_records_{datetime.now().strftime('%Y%m%d%H%M%S')}.csv"
-                columns = ['Loan ID', 'Campaign', 'DPD', 'Amount', 'Date Paid', 'Operator Name', 'Customer Name']
+                csv_path, filename, record_count = export_campaign_data(
+                    campaign, start_date, end_date, include_headers
+                )
             else:  # disputes
-                records = Dispute.query.filter_by(status='approved')
-                filename = f"validated_disputes_{datetime.now().strftime('%Y%m%d%H%M%S')}.csv"
-                columns = ['ID', 'Entry ID', 'Reason', 'Corrected Details', 'Validated By', 'Validation Date']
-            
-            # Apply date filters
-            if start_date:
-                records = records.filter(PaymentRecord.date_paid >= start_date)
-            if end_date:
-                records = records.filter(PaymentRecord.date_paid <= end_date)
-            
-            records = records.all()
-            record_count = len(records)
-            
-            if export_type == 'campaign':
-                data = [(r.loan_id, r.campaign, r.dpd, r.amount, r.date_paid, 
-                        r.operator_name, r.customer_name) for r in records]
-            else:
-                data = [(d.id, d.entry_id, d.reason, d.corrected_details,
-                        d.validated_by, d.validated_at) for d in records]
-            
-            df = pd.DataFrame(data, columns=columns)
-            csv_path = export_to_csv(df, filename, include_headers)
+                csv_path, filename, record_count = export_dispute_data(
+                    start_date, end_date, include_headers
+                )
             
             # Record the export
             export_history = ExportHistory(
@@ -161,21 +148,63 @@ def export_data():
     
     return render_template('data_analyst/export.html', form=form, export_history=export_history)
 
-@bp.route('/download-export/<int:export_id>')
+@bp.route('/download-export/<filename>')
 @login_required
-def download_export(export_id):
+def download_export(filename):
     if current_user.role != 'data_analyst':
         flash('Access denied: Data Analyst role required', 'danger')
         return redirect(url_for('main.index'))
     
-    export_record = ExportHistory.query.get_or_404(export_id)
-    
-    # Check if file exists
-    export_dir = os.path.join(current_app.root_path, '..', 'exports')
-    file_path = os.path.join(export_dir, export_record.filename)
-    
-    if os.path.exists(file_path):
-        return send_file(file_path, as_attachment=True, download_name=export_record.filename)
-    else:
-        flash('Export file not found. It may have been deleted.', 'danger')
+    # Security check - validate filename to prevent path traversal
+    if not filename or '..' in filename or filename.startswith('/'):
+        flash('Invalid filename', 'danger')
         return redirect(url_for('data_analyst.export_data'))
+    
+    # Path to the export file
+    export_dir = os.path.join(current_app.root_path, '..', 'exports')
+    return send_from_directory(export_dir, filename, as_attachment=True)
+
+@bp.route('/dispute-review', methods=['GET', 'POST'])
+@login_required
+def dispute_review():
+    if current_user.role != 'data_analyst':
+        flash('Access denied: Data Analyst role required', 'danger')
+        return redirect(url_for('auth.login'))
+    
+    # Load disputes that have been approved by Team Leaders but need DA verification
+    disputes = Dispute.query.filter_by(status='pending_da_review')\
+        .join(PaymentRecord, Dispute.entry_id == PaymentRecord.id)\
+        .options(joinedload(Dispute.payment_record))\
+        .order_by(Dispute.validated_at.desc())\
+        .all()
+    
+    # Handle form submission if this is a POST request
+    if request.method == 'POST':
+        dispute_id = request.form.get('dispute_id')
+        action = request.form.get('action')
+        comments = request.form.get('comments', '')
+        
+        dispute = Dispute.query.get_or_404(dispute_id)
+        
+        try:
+            if action == 'approve':
+                dispute.status = 'approved'
+                dispute.da_verified_by = current_user.username
+                dispute.da_comments = comments
+                dispute.da_verified_at = datetime.utcnow()
+                flash('Dispute verified and finalized', 'success')
+            elif action == 'reject':
+                # Sending back to Team Leader for reconsideration
+                dispute.status = 'pending'
+                dispute.da_verified_by = current_user.username
+                dispute.da_comments = comments
+                dispute.da_verified_at = datetime.utcnow()
+                flash('Dispute returned to Team Leader for reconsideration', 'warning')
+            
+            db.session.commit()
+            return redirect(url_for('data_analyst.dispute_review'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error processing dispute: {str(e)}', 'danger')
+    
+    return render_template('data_analyst/dispute_review.html', disputes=disputes)

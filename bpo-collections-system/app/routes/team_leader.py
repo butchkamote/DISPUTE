@@ -5,6 +5,7 @@ from app.forms import PaymentEntryForm, PaymentRecordSearchForm  # Add this impo
 from app import db
 from datetime import datetime
 from sqlalchemy import or_
+from sqlalchemy.orm import joinedload  # Add this import at the top
 from app.utils.file_helpers import save_payment_proofs
 import os
 from flask import current_app
@@ -78,7 +79,15 @@ def dispute_validation():
     if current_user.role != 'team_leader':
         flash('Access denied: Team Leader role required', 'danger')
         return redirect(url_for('main.index'))
-        
+    
+    # Load disputes with their payment records in one query to avoid N+1 queries
+    disputes = Dispute.query.filter_by(status='pending')\
+        .join(PaymentRecord, Dispute.entry_id == PaymentRecord.id)\
+        .options(joinedload(Dispute.payment_record))\
+        .order_by(Dispute.created_at.desc())\
+        .all()
+    
+    # Handle form submission if this is a POST request
     if request.method == 'POST':
         dispute_id = request.form.get('dispute_id')
         action = request.form.get('action')
@@ -88,25 +97,25 @@ def dispute_validation():
         
         try:
             if action == 'approve':
-                dispute.status = 'approved'
+                # Change status to pending_da_review instead of approved
+                dispute.status = 'pending_da_review'
                 dispute.validated_by = current_user.username
                 dispute.validation_comments = comments
-                flash('Dispute approved successfully', 'success')
+                dispute.validated_at = datetime.utcnow()
+                flash('Dispute approved and sent to Data Analysts for final verification', 'success')
             elif action == 'reject':
                 dispute.status = 'rejected'
                 dispute.validated_by = current_user.username
                 dispute.validation_comments = comments
+                dispute.validated_at = datetime.utcnow()
                 flash('Dispute rejected', 'warning')
             
             db.session.commit()
+            return redirect(url_for('team_leader.dispute_validation'))
         except Exception as e:
             db.session.rollback()
             flash(f'Error processing dispute: {str(e)}', 'danger')
-            
-        return redirect(url_for('team_leader.dispute_validation'))
-
-    # Get all disputes for validation
-    disputes = Dispute.query.filter_by(status='pending').all()
+    
     return render_template('team_leader/dispute_validation.html', disputes=disputes)
 
 @bp.route('/create-dispute', methods=['POST'])
@@ -185,8 +194,8 @@ def search_records():
     campaigns = db.session.query(PaymentRecord.campaign).distinct().all()
     search_form.campaign.choices = [('', 'All Campaigns')] + [(c[0], c[0]) for c in campaigns if c[0]]
     
-    # Build the base query
-    query = PaymentRecord.query
+    # Build the base query - USE CLASS ATTRIBUTE NOT STRING
+    query = PaymentRecord.query.options(joinedload(PaymentRecord.proofs))
     
     # Apply filters if form is submitted or GET parameters exist
     if search_form.validate_on_submit() or request.args:
@@ -266,7 +275,8 @@ def search_records():
 @bp.route('/view-proof/<int:proof_id>')
 @login_required
 def view_proof(proof_id):
-    if current_user.role != 'team_leader':
+    # Allow both team leaders and data analysts to view proofs
+    if current_user.role not in ['team_leader', 'data_analyst']:
         flash('Access denied', 'danger')
         return redirect(url_for('auth.login'))
         
@@ -285,11 +295,15 @@ def view_proof(proof_id):
 @bp.route('/record-proofs/<int:record_id>')
 @login_required
 def record_proofs(record_id):
-    if current_user.role != 'team_leader':
+    # Allow both team leaders and data analysts to view proofs
+    if current_user.role not in ['team_leader', 'data_analyst']:
         flash('Access denied', 'danger')
         return redirect(url_for('auth.login'))
-        
+    
+    # Get the source parameter (defaults to data_entry for team leaders)
+    source = request.args.get('source', 'data_entry')
+    
     payment = PaymentRecord.query.get_or_404(record_id)
     proofs = PaymentProof.query.filter_by(payment_id=record_id).all()
     
-    return render_template('team_leader/view_proofs.html', payment=payment, proofs=proofs)
+    return render_template('team_leader/view_proofs.html', payment=payment, proofs=proofs, source=source)
