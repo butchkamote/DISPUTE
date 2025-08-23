@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Dispute Validation - BPO Collections System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Dispute Validation</h5>
+        <div>
+            <select id="statusFilter" class="form-select form-select-sm">
+                <option value="all">All Disputes</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if disputes %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Campaign</th>
+                        <th>Loan ID</th>
+                        <th>Original Data</th>
+                        <th>Disputed Details</th>
+                        <th>Reason</th>
+                        <th>Submitted By</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dispute in disputes %}
+                    <tr class="dispute-row" data-status="{{ dispute.status }}">
+                        <td>{{ dispute.id }}</td>
+                        <td>{{ dispute.payment_record.campaign }}</td>
+                        <td>{{ dispute.entry.loan_id }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#originalDataModal-{{ dispute.id }}">
+                                View Original
+                            </button>
+                        </td>
+                        <td>{{ dispute.corrected_details }}</td>
+                        <td>{{ dispute.reason }}</td>
+                        <td>{{ dispute.created_by }}</td>
+                        <td>{{ dispute.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <span class="badge bg-{{ dispute.status|lower == 'pending' and 'warning' or dispute.status|lower == 'approved' and 'success' or 'danger' }}">
+                                {{ dispute.status }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if dispute.status|lower == 'pending' %}
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-success validate-btn" data-id="{{ dispute.id }}" data-action="approve">
+                                    <i class="bi bi-check-lg"></i> Approve
+                                </button>
+                                <button class="btn btn-danger validate-btn" data-id="{{ dispute.id }}" data-action="reject">
+                                    <i class="bi bi-x-lg"></i> Reject
+                                </button>
+                            </div>
+                            {% else %}
+                            <small class="text-muted">Validated by {{ dispute.validated_by }}</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    <!-- Original Data Modal -->
+                    <div class="modal fade" id="originalDataModal-{{ dispute.id }}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Original Entry Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Campaign</th>
+                                            <td>{{ dispute.payment_record.campaign }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>DPD</th>
+                                            <td>{{ dispute.entry.dpd }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loan ID</th>
+                                            <td>{{ dispute.entry.loan_id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Amount</th>
+                                            <td>{{ dispute.entry.amount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date Paid</th>
+                                            <td>{{ dispute.entry.date_paid }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Operator Name</th>
+                                            <td>{{ dispute.entry.operator_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <td>{{ dispute.entry.customer_name }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">No disputes to validate at this time.</div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Validation Modal -->
+<div class="modal fade" id="validationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="validationModalTitle">Validate Dispute</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="validationForm" method="POST" action="{{ url_for('team_leader.validate_dispute') }}">
+                    <input type="hidden" id="dispute_id" name="dispute_id">
+                    <input type="hidden" id="action" name="action">
+                    
+                    <div class="mb-3">
+                        <label for="comments" class="form-label">Comments</label>
+                        <textarea class="form-control" id="comments" name="comments" rows="3" placeholder="Add any comments regarding your decision"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Status filtering
+        const statusFilter = document.getElementById('statusFilter');
+        statusFilter.addEventListener('change', function() {
+            const selectedStatus = this.value;
+            const disputeRows = document.querySelectorAll('.dispute-row');
+            
+            disputeRows.forEach(row => {
+                if (selectedStatus === 'all' || row.dataset.status.toLowerCase() === selectedStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Validation buttons
+        const validateBtns = document.querySelectorAll('.validate-btn');
+        validateBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const disputeId = this.getAttribute('data-id');
+                const action = this.getAttribute('data-action');
+                
+                document.getElementById('dispute_id').value = disputeId;
+                document.getElementById('action').value = action;
+                
+                const modalTitle = document.getElementById('validationModalTitle');
+                modalTitle.textContent = action === 'approve' ? 'Approve Dispute' : 'Reject Dispute';
+                
+                const validationModal = new bootstrap.Modal(document.getElementById('validationModal'));
+                validationModal.show();
+            });
+        });
+    });
+</script>
+{% endblock %}

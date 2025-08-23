@@ -1,0 +1,245 @@
+<!-- filepath: app/templates/team_leader/data_entry.html -->
+{% extends "base.html" %}
+
+{% block title %}Data Entry - BPO Collections System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Payment Data Entry</h5>
+    </div>
+    <div class="card-body">
+        <!-- Important: Add enctype for file uploads -->
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.campaign.label(class="form-label") }}
+                    {{ form.campaign(class="form-select") }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.dpd.label(class="form-label") }}
+                    {{ form.dpd(class="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.loan_id.label(class="form-label") }}
+                    {{ form.loan_id(class="form-control") }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.amount.label(class="form-label") }}
+                    {{ form.amount(class="form-control", placeholder="0.00") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.date_paid.label(class="form-label") }}
+                    {{ form.date_paid(class="form-control") }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.operator_name.label(class="form-label") }}
+                    {{ form.operator_name(class="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.customer_name.label(class="form-label") }}
+                    {{ form.customer_name(class="form-control") }}
+                </div>
+                <!-- Add the proof image upload field -->
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        {{ form.proof_types.label(class="form-label") }}
+                        {{ form.proof_types(class="form-select") }}
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        {{ form.proof_images.label(class="form-label") }}
+                        {{ form.proof_images(class="form-control", multiple=True) }}
+                        <small class="text-muted">Upload receipts, screenshots, emails as proof of payment (JPG, PNG, or PDF)</small>
+                        <small class="text-danger d-block">*Required. Hold Ctrl/Cmd to select multiple files</small>
+                    </div>
+                </div>
+                
+                <div class="col-12" id="file-preview-container">
+                    <div class="row" id="file-previews"></div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Recent entries table -->
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Recent Entries</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Campaign</th>
+                        <th>Loan ID</th>
+                        <th>Amount</th>
+                        <th>Date Paid</th>
+                        <th>Operator</th>
+                        <th>Customer</th>
+                        <th>Proof</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in recent_entries %}
+                    <tr>
+                        <td>{{ entry.campaign }}</td>
+                        <td>{{ entry.loan_id }}</td>
+                        <td>{{ entry.amount }}</td>
+                        <td>{{ entry.date_paid }}</td>
+                        <td>{{ entry.operator_name }}</td>
+                        <td>{{ entry.customer_name }}</td>
+                        <td>
+                            {% if entry.proof_image_path %}
+                                <a href="{{ url_for('team_leader.view_proof', record_id=entry.id) }}" class="btn btn-sm btn-info" target="_blank">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                            {% else %}
+                                <span class="badge bg-secondary">No proof</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#disputeModal" 
+                                    data-record-id="{{ entry.id }}">
+                                Create Dispute
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center">No recent entries</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Dispute Modal -->
+<div class="modal fade" id="disputeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Dispute</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="disputeForm" method="POST" action="{{ url_for('team_leader.create_dispute') }}">
+                    <input type="hidden" id="entry_id" name="entry_id">
+                    <div class="mb-3">
+                        <label class="form-label">Reason for Dispute</label>
+                        <select class="form-select" name="reason">
+                            <option value="wrong_operator">Wrong Operator</option>
+                            <option value="wrong_amount">Wrong Amount</option>
+                            <option value="wrong_date">Wrong Date</option>
+                            <option value="duplicate_entry">Duplicate Entry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Corrected Details</label>
+                        <textarea class="form-control" name="corrected_details" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Dispute</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const disputeBtns = document.querySelectorAll('.dispute-btn');
+        disputeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const entryId = this.getAttribute('data-id');
+                document.getElementById('entry_id').value = entryId;
+                const disputeModal = new bootstrap.Modal(document.getElementById('disputeModal'));
+                disputeModal.show();
+            });
+        });
+    });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.querySelector('input[type="file"][multiple]');
+    const previewContainer = document.getElementById('file-previews');
+    
+    fileInput.addEventListener('change', function() {
+        // Clear previous previews
+        previewContainer.innerHTML = '';
+        
+        if (this.files.length > 0) {
+            // Create header for previews
+            const header = document.createElement('div');
+            header.className = 'col-12 mb-3';
+            header.innerHTML = `<h6>Selected Files (${this.files.length})</h6>`;
+            previewContainer.appendChild(header);
+            
+            // Create previews for each file
+            Array.from(this.files).forEach((file, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 mb-3';
+                
+                const card = document.createElement('div');
+                card.className = 'card h-100';
+                
+                // Create preview if it's an image
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.className = 'card-img-top';
+                    img.style.height = '120px';
+                    img.style.objectFit = 'cover';
+                    
+                    // Create object URL for preview
+                    img.src = URL.createObjectURL(file);
+                    card.appendChild(img);
+                } else {
+                    // For non-images (like PDFs)
+                    const placeholderDiv = document.createElement('div');
+                    placeholderDiv.className = 'card-img-top bg-light d-flex align-items-center justify-content-center';
+                    placeholderDiv.style.height = '120px';
+                    
+                    const icon = document.createElement('i');
+                    icon.className = 'bi bi-file-earmark-text display-4';
+                    placeholderDiv.appendChild(icon);
+                    
+                    card.appendChild(placeholderDiv);
+                }
+                
+                // File info
+                const body = document.createElement('div');
+                body.className = 'card-body p-2';
+                body.innerHTML = `
+                    <p class="card-text small text-truncate">${file.name}</p>
+                    <p class="card-text small text-muted">${(file.size / 1024).toFixed(2)} KB</p>
+                `;
+                card.appendChild(body);
+                
+                col.appendChild(card);
+                previewContainer.appendChild(col);
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
