@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Proofs - BPO Collections System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">
+            Payment Proofs for {{ payment.campaign }} - {{ payment.loan_id }}
+            <a href="{{ url_for('team_leader.data_entry') }}" class="btn btn-sm btn-light float-end">Back</a>
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <p><strong>Campaign:</strong> {{ payment.campaign }}</p>
+                <p><strong>Loan ID:</strong> {{ payment.loan_id }}</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Customer:</strong> {{ payment.customer_name }}</p>
+                <p><strong>Amount:</strong> {{ payment.amount }}</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Date Paid:</strong> {{ payment.date_paid }}</p>
+                <p><strong>Operator:</strong> {{ payment.operator_name }}</p>
+            </div>
+        </div>
+        
+        <h6>Proof of Payment ({{ proofs|length }} files)</h6>
+        
+        <div class="row">
+            {% for proof in proofs %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if proof.file_path.endswith(('.jpg', '.jpeg', '.png', '.gif')) %}
+                        <img src="{{ url_for('team_leader.view_proof', proof_id=proof.id) }}" 
+                             class="card-img-top img-fluid" 
+                             style="max-height: 250px; object-fit: contain;">
+                    {% else %}
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <i class="bi bi-file-earmark-text display-4"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h6 class="card-title">{{ proof.file_type|title }}</h6>
+                        <p class="card-text text-muted">Uploaded: {{ proof.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <a href="{{ url_for('team_leader.view_proof', proof_id=proof.id) }}" 
+                           class="btn btn-primary btn-sm" 
+                           target="_blank">View Full Size</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning">No proof files found for this payment.</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

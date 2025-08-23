@@ -104,9 +104,9 @@
                         <td>{{ entry.operator_name }}</td>
                         <td>{{ entry.customer_name }}</td>
                         <td>
-                            {% if entry.proof_image_path %}
-                                <a href="{{ url_for('team_leader.view_proof', record_id=entry.id) }}" class="btn btn-sm btn-info" target="_blank">
-                                    <i class="bi bi-eye"></i> View
+                            {% if entry.proofs|length > 0 %}
+                                <a href="{{ url_for('team_leader.record_proofs', record_id=entry.id) }}" class="btn btn-sm btn-info">
+                                    <i class="bi bi-images"></i> View ({{ entry.proofs|length }})
                                 </a>
                             {% else %}
                                 <span class="badge bg-secondary">No proof</span>
