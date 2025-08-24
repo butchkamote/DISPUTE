@@ -3,88 +3,72 @@ from flask_login import login_required, current_user
 from app.models import PaymentRecord, Dispute, ExportHistory
 from app import db
 from datetime import datetime, timedelta
+import json  # Add this import
 from sqlalchemy import func, and_, or_
-from sqlalchemy.orm import joinedload  # Add this import
+from sqlalchemy.orm import joinedload
 from app.utils.export_helpers import export_campaign_data, export_dispute_data
 from app.forms import CampaignFilterForm, ExportForm
 
 # Single blueprint definition with a url_prefix
 bp = Blueprint('data_analyst', __name__, url_prefix='/data-analyst')
 
-@bp.route('/campaign-filter', methods=['GET'])
+@bp.route('/campaign-filter', methods=['GET', 'POST'])
 @login_required
 def campaign_filter():
     if current_user.role != 'data_analyst':
         flash('Access denied: Data Analyst role required', 'danger')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('auth.login'))
     
     form = CampaignFilterForm()
     
-    # Get filter parameters
-    campaign = request.args.get('campaign', '')
-    start_date = request.args.get('start_date', '')
-    end_date = request.args.get('end_date', '')
-    operator = request.args.get('operator', '')
-    min_amount = request.args.get('min_amount', '')
-    max_amount = request.args.get('max_amount', '')
+    # Get all campaigns for dropdown
+    all_campaigns = db.session.query(PaymentRecord.campaign).distinct().all()
+    form.campaign.choices = [('', 'All Campaigns')] + [(c[0], c[0]) for c in all_campaigns if c[0]]
     
-    # Build query
+    # Initialize variables with default values
+    campaign = None
+    start_date = None
+    end_date = None
+    operator = None
+    min_amount = None
+    max_amount = None
+    
+    # Base query
     query = PaymentRecord.query
     
-    if campaign:
-        query = query.filter_by(campaign=campaign)
-    if start_date:
-        query = query.filter(PaymentRecord.date_paid >= start_date)
-    if end_date:
-        query = query.filter(PaymentRecord.date_paid <= end_date)
-    if operator:
-        query = query.filter(PaymentRecord.operator_name.like(f'%{operator}%'))
-    if min_amount:
-        query = query.filter(PaymentRecord.amount >= float(min_amount))
-    if max_amount:
-        query = query.filter(PaymentRecord.amount <= float(max_amount))
+    # Apply filters if form is submitted
+    if form.validate_on_submit() or request.args.get('campaign'):
+        campaign = form.campaign.data or request.args.get('campaign')
+        start_date = form.start_date.data
+        end_date = form.end_date.data
+        operator = form.operator.data
+        min_amount = form.min_amount.data
+        max_amount = form.max_amount.data
+        
+        if campaign:
+            query = query.filter(PaymentRecord.campaign == campaign)
+        if start_date:
+            query = query.filter(PaymentRecord.date_paid >= start_date)
+        if end_date:
+            query = query.filter(PaymentRecord.date_paid <= end_date)
+        if operator:
+            query = query.filter(PaymentRecord.operator_name.ilike(f'%{operator}%'))
+        if min_amount is not None:
+            query = query.filter(PaymentRecord.amount >= min_amount)
+        if max_amount is not None:
+            query = query.filter(PaymentRecord.amount <= max_amount)
     
     # Pagination
     page = request.args.get('page', 1, type=int)
-    per_page = 20
-    pagination = query.order_by(PaymentRecord.date_paid.desc()).paginate(page=page, per_page=per_page)
-    entries = pagination.items
-    total_pages = pagination.pages
+    per_page = 10
+    pagination = query.order_by(PaymentRecord.created_at.desc()).paginate(page=page, per_page=per_page)
+    records = pagination.items
     
-    # Get unique campaigns for the dropdown
-    all_campaigns = db.session.query(PaymentRecord.campaign).distinct().all()
-    campaigns = [c[0] for c in all_campaigns]
-    
-    # Build filter parameters dict for pagination links
-    filter_params = {}
-    if campaign:
-        filter_params['campaign'] = campaign
-    if start_date:
-        filter_params['start_date'] = start_date
-    if end_date:
-        filter_params['end_date'] = end_date
-    if operator:
-        filter_params['operator'] = operator
-    if min_amount:
-        filter_params['min_amount'] = min_amount
-    if max_amount:
-        filter_params['max_amount'] = max_amount
-    
-    return render_template(
-        'data_analyst/campaign_filter.html',
-        form=form,
-        entries=entries,
-        campaigns=campaigns,
-        selected_campaign=campaign,
-        start_date=start_date,
-        end_date=end_date,
-        operator=operator,
-        min_amount=min_amount,
-        max_amount=max_amount,
-        page=page,
-        total_pages=total_pages,
-        filter_params=filter_params
-    )
+    return render_template('data_analyst/campaign_filter.html',
+                          form=form,
+                          records=records,
+                          pagination=pagination,
+                          selected_campaign=campaign)
 
 @bp.route('/export-data', methods=['GET', 'POST'])
 @login_required

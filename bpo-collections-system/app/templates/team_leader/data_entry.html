@@ -1,9 +1,47 @@
 <!-- filepath: app/templates/team_leader/data_entry.html -->
 {% extends "base.html" %}
 
-{% block title %}Data Entry - BPO Collections System{% endblock %}
+{% block title %}Data Entry - HTSS Payments{% endblock %}
 
 {% block content %}
+<div class="page-header d-flex justify-content-between align-items-center animate__animated animate__fadeIn">
+    <h2>Data Entry Dashboard</h2>
+    <div>
+        <span class="badge bg-primary">{{ today_date }}</span>
+    </div>
+</div>
+
+<div class="row animate__animated animate__fadeInUp">
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card bg-gradient-primary">
+            <div class="icon"><i class="bi bi-receipt"></i></div>
+            <h3>{{ total_records }}</h3>
+            <p>Total Records</p>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card bg-gradient-success">
+            <div class="icon"><i class="bi bi-calendar-check"></i></div>
+            <h3>{{ today_records }}</h3>
+            <p>Today's Entries</p>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card bg-gradient-info">
+            <div class="icon"><i class="bi bi-images"></i></div>
+            <h3>{{ records_with_proofs }}</h3>
+            <p>With Payment Proof</p>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card bg-gradient-warning">
+            <div class="icon"><i class="bi bi-exclamation-triangle"></i></div>
+            <h3>{{ pending_disputes }}</h3>
+            <p>Pending Disputes</p>
+        </div>
+    </div>
+</div>
+
 <div class="card">
     <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Payment Data Entry</h5>

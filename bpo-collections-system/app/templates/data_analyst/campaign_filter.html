@@ -3,94 +3,88 @@
 {% block title %}Campaign Filter - BPO Collections System{% endblock %}
 
 {% block content %}
+<!-- Filter Card -->
 <div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">Filter Payment Records</h5>
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Filter Records</h5>
     </div>
     <div class="card-body">
-        <form method="GET" id="filterForm">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label for="campaign" class="form-label">Campaign</label>
-                    <select class="form-select" id="campaign" name="campaign">
-                        <option value="">All Campaigns</option>
-                        {% for campaign in campaigns %}
-                        <option value="{{ campaign }}" {% if selected_campaign == campaign %}selected{% endif %}>{{ campaign }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="start_date" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="end_date" class="form-label">End Date</label>
-                    <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
-                </div>
+        <form id="filterForm" method="POST" action="{{ url_for('data_analyst.campaign_filter') }}" class="row g-3">
+            {{ form.csrf_token }}
+            
+            <div class="col-md-6">
+                {{ form.campaign.label(class="form-label") }}
+                {{ form.campaign(class="form-select") }}
             </div>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label for="operator" class="form-label">Operator</label>
-                    <input type="text" class="form-control" id="operator" name="operator" value="{{ operator }}">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="min_amount" class="form-label">Min Amount</label>
-                    <input type="number" class="form-control" id="min_amount" name="min_amount" step="0.01" value="{{ min_amount }}">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="max_amount" class="form-label">Max Amount</label>
-                    <input type="number" class="form-control" id="max_amount" name="max_amount" step="0.01" value="{{ max_amount }}">
-                </div>
+            
+            <div class="col-md-6">
+                {{ form.operator.label(class="form-label") }}
+                {{ form.operator(class="form-control") }}
             </div>
-            <div class="d-flex">
-                <button type="submit" class="btn btn-primary me-2">Apply Filters</button>
-                <button type="button" class="btn btn-secondary me-2" id="resetBtn">Reset Filters</button>
-                <button type="button" class="btn btn-success" id="exportBtn">Export Results</button>
+            
+            <div class="col-md-3">
+                {{ form.start_date.label(class="form-label") }}
+                {{ form.start_date(class="form-control", type="date") }}
+            </div>
+            
+            <div class="col-md-3">
+                {{ form.end_date.label(class="form-label") }}
+                {{ form.end_date(class="form-control", type="date") }}
+            </div>
+            
+            <div class="col-md-3">
+                {{ form.min_amount.label(class="form-label") }}
+                {{ form.min_amount(class="form-control") }}
+            </div>
+            
+            <div class="col-md-3">
+                {{ form.max_amount.label(class="form-label") }}
+                {{ form.max_amount(class="form-control") }}
+            </div>
+            
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Filter Records
+                </button>
+                <button type="button" id="resetBtn" class="btn btn-secondary">
+                    <i class="bi bi-arrow-repeat"></i> Reset
+                </button>
+                <button type="button" id="exportBtn" class="btn btn-success">
+                    <i class="bi bi-file-earmark-excel"></i> Export Results
+                </button>
             </div>
         </form>
     </div>
 </div>
 
+<!-- Results Table -->
 <div class="card mt-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Results</h5>
-        <span class="badge bg-primary">{{ entries|length }} records</span>
     </div>
     <div class="card-body">
-        {% if entries %}
+        {% if records %}
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="bg-light text-dark">
-                        <th>ID</th>
                         <th>Campaign</th>
-                        <th>DPD</th>
                         <th>Loan ID</th>
+                        <th>Customer</th>
                         <th>Amount</th>
                         <th>Date Paid</th>
                         <th>Operator</th>
-                        <th>Customer</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entry in entries %}
+                    {% for record in records %}
                     <tr>
-                        <td>{{ entry.id }}</td>
-                        <td>{{ entry.campaign }}</td>
-                        <td>{{ entry.dpd }}</td>
-                        <td>{{ entry.loan_id }}</td>
-                        <td>{{ entry.amount }}</td>
-                        <td>{{ entry.date_paid }}</td>
-                        <td>{{ entry.operator_name }}</td>
-                        <td>{{ entry.customer_name }}</td>
-                        <td>
-                            {% if entry.disputed %}
-                            <span class="badge bg-warning">Disputed</span>
-                            {% else %}
-                            <span class="badge bg-success">Valid</span>
-                            {% endif %}
-                        </td>
+                        <td>{{ record.campaign }}</td>
+                        <td>{{ record.loan_id }}</td>
+                        <td>{{ record.customer_name }}</td>
+                        <td>{{ record.amount }}</td>
+                        <td>{{ record.date_paid }}</td>
+                        <td>{{ record.operator_name }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -98,37 +92,39 @@
         </div>
         
         <!-- Pagination -->
-        <nav aria-label="Page navigation">
+        {% if pagination.pages > 1 %}
+        <nav aria-label="Page navigation" class="mt-4">
             <ul class="pagination justify-content-center">
-                {% if page > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ url_for('data_analyst.campaign_filter', page=page-1, **filter_params) }}">Previous</a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Previous</a>
-                </li>
-                {% endif %}
-                
-                {% for i in range(1, total_pages + 1) %}
-                <li class="page-item {{ 'active' if i == page else '' }}">
-                    <a class="page-link" href="{{ url_for('data_analyst.campaign_filter', page=i, **filter_params) }}">{{ i }}</a>
-                </li>
+                {% for page_num in pagination.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != pagination.page %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('data_analyst.campaign_filter', page=page_num, 
+                                campaign=request.form.get('campaign'), 
+                                start_date=request.form.get('start_date'), 
+                                end_date=request.form.get('end_date'),
+                                operator=request.form.get('operator'),
+                                min_amount=request.form.get('min_amount'),
+                                max_amount=request.form.get('max_amount')) }}">{{ page_num }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
                 {% endfor %}
-                
-                {% if page < total_pages %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ url_for('data_analyst.campaign_filter', page=page+1, **filter_params) }}">Next</a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-                {% endif %}
             </ul>
         </nav>
+        {% endif %}
         {% else %}
-        <div class="alert alert-info">No records found matching the filter criteria.</div>
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No records found matching your criteria.
+        </div>
         {% endif %}
     </div>
 </div>
@@ -137,23 +133,44 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Reset button
-        document.getElementById('resetBtn').addEventListener('click', function() {
-            document.querySelectorAll('#filterForm input, #filterForm select').forEach(elem => {
-                if (elem.type === 'text' || elem.type === 'number' || elem.type === 'date') {
-                    elem.value = '';
-                } else if (elem.tagName === 'SELECT') {
-                    elem.selectedIndex = 0;
+        // Reset button handling
+        const resetBtn = document.getElementById('resetBtn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filterForm = document.getElementById('filterForm');
+                if (filterForm) {
+                    const inputs = filterForm.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                        if (input.type !== 'submit' && input.type !== 'button') {
+                            if (input.type === 'text' || input.type === 'number' || input.type === 'date') {
+                                input.value = '';
+                            } else if (input.tagName === 'SELECT') {
+                                input.selectedIndex = 0;
+                            }
+                        }
+                    });
+                    filterForm.submit();
                 }
             });
-            document.getElementById('filterForm').submit();
-        });
+        }
         
-        // Export button
-        document.getElementById('exportBtn').addEventListener('click', function() {
-            const queryParams = new URLSearchParams(new FormData(document.getElementById('filterForm'))).toString();
-            window.location.href = "{{ url_for('data_analyst.export_data') }}?" + queryParams;
-        });
+        // Export button handling
+        const exportBtn = document.getElementById('exportBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filterForm = document.getElementById('filterForm');
+                if (filterForm) {
+                    const formData = new FormData(filterForm);
+                    const params = new URLSearchParams();
+                    for (const [key, value] of formData.entries()) {
+                        if (value) params.append(key, value);
+                    }
+                    window.location.href = "{{ url_for('data_analyst.export_data') }}?" + params.toString();
+                }
+            });
+        }
     });
 </script>
 {% endblock %}

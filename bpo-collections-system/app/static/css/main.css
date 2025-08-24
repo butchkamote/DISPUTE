@@ -1,7 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
 }
 
@@ -53,6 +51,9 @@ input[type="submit"]:hover {
 }
 
 .table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
@@ -68,6 +69,24 @@ input[type="submit"]:hover {
 .table th {
     background-color: #35424a;
     color: white;
+}
+
+.table thead th {
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e3e6f0;
+    background-color: #f8f9fc;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(246, 247, 252, 0.5);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(231, 236, 255, 0.7);
 }
 
 .alert {
@@ -96,12 +115,22 @@ input[type="submit"]:hover {
 }
 
 .card {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
     border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 24px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .card-header {
+    border-radius: 10px 10px 0 0 !important;
+    border-bottom: none;
+    padding: 15px 20px;
     background-color: #f8f9fa;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     font-weight: 600;
@@ -111,28 +140,61 @@ input[type="submit"]:hover {
     margin-bottom: 0;
 }
 
-.table thead th {
-    background-color: #f8f9fa;
-    border-top: none;
-}
-
 .badge {
     font-size: 85%;
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+.form-control, .form-select {
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #4e73df;
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.1);
+}
+
+.btn {
+    border-radius: 5px;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background: linear-gradient(45deg, #4e73df, #2e59d9);
+    border: none;
 }
 
 .btn-primary:hover {
     background-color: #0b5ed7;
     border-color: #0a58ca;
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #1cc88a, #0ca678);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #e74a3b, #c0392b);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #f6c23e, #f39c12);
+    border: none;
+}
+
+.btn-info {
+    background: linear-gradient(45deg, #36b9cc, #2980b9);
+    border: none;
 }
 
 .alert {
@@ -189,4 +251,163 @@ input[type="submit"]:hover {
 .bg-warning thead th,
 .bg-info thead th {
     color: #fff !important;
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Dashboard stats cards */
+.stat-card {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.stat-card .icon {
+    position: absolute;
+    right: 20px;
+    font-size: 3rem;
+    opacity: 0.2;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.stat-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #4e73df, #2e59d9);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(45deg, #1cc88a, #0ca678);
+}
+
+.bg-gradient-info {
+    background: linear-gradient(45deg, #36b9cc, #2980b9);
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(45deg, #f6c23e, #f39c12);
+}
+
+/* Progress bar enhancements */
+.progress {
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.05);
+    margin-top: 8px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* Page header styling */
+.page-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e3e6f0;
+    padding-bottom: 12px;
+}
+
+.page-header h2 {
+    font-weight: 600;
+    color: #5a5c69;
+}
+
+/* Add these styles at the end */
+
+/* Enhanced modals */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+    border-bottom: none;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 20px;
+}
+
+.modal-backdrop.show {
+    opacity: 0.7;
+}
+
+/* Animations for modal */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+/* Add these styles */
+
+#page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#page-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #4e73df;
+    border-bottom-color: #4e73df;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-content p {
+    margin-top: 10px;
+    color: #5a5c69;
+    font-weight: 500;
 }

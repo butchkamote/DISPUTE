@@ -69,9 +69,30 @@ def data_entry():
     # Get recent entries for display
     recent_entries = PaymentRecord.query.order_by(PaymentRecord.created_at.desc()).limit(10).all()
     
-    return render_template('team_leader/data_entry.html', 
-                          form=form, 
-                          recent_entries=recent_entries)
+    # Add these stats queries
+    from datetime import date
+    from sqlalchemy import func
+    
+    today_date = date.today().strftime("%B %d, %Y")
+    total_records = PaymentRecord.query.count()
+    today_records = PaymentRecord.query.filter(func.date(PaymentRecord.created_at) == date.today()).count()
+    
+    # Count records with proofs
+    records_with_proofs = db.session.query(PaymentRecord.id)\
+        .join(PaymentProof, PaymentRecord.id == PaymentProof.payment_id)\
+        .group_by(PaymentRecord.id).count()
+    
+    # Count pending disputes
+    pending_disputes = Dispute.query.filter_by(status='pending').count()
+    
+    return render_template('team_leader/data_entry.html',
+                          form=form,
+                          recent_entries=recent_entries,
+                          today_date=today_date,
+                          total_records=total_records,
+                          today_records=today_records,
+                          records_with_proofs=records_with_proofs,
+                          pending_disputes=pending_disputes)
 
 @bp.route('/dispute-validation', methods=['GET', 'POST'])
 @login_required

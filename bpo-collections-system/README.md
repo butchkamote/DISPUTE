@@ -1,4 +1,4 @@
-# BPO Collections System
+# HTSS Payments
 
 This project is a local web application designed for a BPO collections company, facilitating data entry, dispute handling, and data analysis. The application has two main user roles: Team Leaders (TLs) and Data Analysts (DAs).
 

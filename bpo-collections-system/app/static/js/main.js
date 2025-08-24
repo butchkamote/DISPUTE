@@ -81,4 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
             rows.forEach(row => tbody.appendChild(row));
         });
     });
+    
+    // Hide loader when page is loaded
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('loaded');
+        }, 500);
+    }
 });
