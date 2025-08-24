@@ -173,3 +173,20 @@ input[type="submit"]:hover {
     max-width: 400px;
     margin: 0 auto;
 }
+
+/* Add this at the end of your main.css file */
+.table thead th {
+    color: #212529 !important; /* Bootstrap's default dark text color */
+}
+
+/* If you want to make sure table headers in dark backgrounds are still visible */
+.table-dark thead th,
+.bg-dark thead th,
+.bg-primary thead th,
+.bg-secondary thead th,
+.bg-success thead th,
+.bg-danger thead th,
+.bg-warning thead th,
+.bg-info thead th {
+    color: #fff !important;
+}

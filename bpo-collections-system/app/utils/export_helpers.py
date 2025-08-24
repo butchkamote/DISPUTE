@@ -49,7 +49,7 @@ def export_campaign_data(campaign=None, start_date=None, end_date=None, include_
 
 def export_dispute_data(start_date=None, end_date=None, include_headers=True):
     """Export approved dispute data to CSV file"""
-    from app.models import Dispute
+    from app.models import Dispute, PaymentRecord  # Add PaymentRecord import here
     from app import db
     
     # Build query
