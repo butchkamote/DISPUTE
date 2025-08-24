@@ -1,0 +1,334 @@
+﻿INDEX,STATUS,EMPLOYEE_ID,NAME,OPERATOR,GROUP,FULL_NAME,CRM_NAME
+1,ACTIVE,HOUSE,HOUSE_1,HOUSE_1,SPV_1,HOUSE,Agent_House_1
+2,ACTIVE,HOUSE,HOUSE_2,HOUSE_2,SPV_2,HOUSE,Agent_House_2
+3,ACTIVE,HOUSE,HOUSE_3,HOUSE_3,SPV_3,HOUSE,Agent_House_3
+4,ACTIVE,HOUSE,HOUSE_4,HOUSE_4,SPV_4,HOUSE,Agent_House_4
+5,ACTIVE,HOUSE,HOUSE_5,HOUSE_5,SPV_5,HOUSE,Agent_House_5
+6,ACTIVE,HOUSE,HOUSE_6,HOUSE_6,SPV_6,HOUSE,Agent_House_6
+7,ACTIVE,HOUSE,HOUSE_7,HOUSE_7,SPV_7,HOUSE,Agent_House_7
+8,ACTIVE,HOUSE,HOUSE_8,HOUSE_8,SPV_8,HOUSE,Agent_House_8
+9,ACTIVE,HOUSE,HOUSE_11,HOUSE_11,SPV_11,HOUSE,Agent_House_11
+10,ACTIVE,HTSS100004,Judith Gonzales Bernardino,JUDITH,TL,Judith Gonzales Bernardino,AGENT_JUDITH
+11,ACTIVE,HTSS100040,Mary Joy Blancaflor General,MARY,TL,Mary Joy Blancaflor General,Agent_Mary
+12,ACTIVE,HTSS100042,Jason Bobe Opelenio Rodriguez,JASON,QA,Jason Bobe Opelenio Rodriguez,Agent_Jason
+13,ACTIVE,HTSS100057,Jeniffer Montero Cortes,JENNIFER,SPV_7,Jeniffer Montero Cortes,Agent_JENNIFER
+14,ACTIVE,HTSS100060,Maricel Preza Tapic,MARICEL,SPV_7,Maricel Preza Tapic,Agent_MARICEL
+15,ACTIVE,HTSS100075,Mariel Tuazon Reyes,MARIEL,SPV_2,Mariel Tuazon Reyes,Agent_Mariel
+16,ACTIVE,HTSS100099,John Christian Santos Jacinto,JACINTO,SPV_7,John Christian Santos Jacinto,Agent_Jacinto
+17,ACTIVE,HTSS100108,Laarni Budlung Nunez,LAARNI,SPV_5,Laarni Budlung Nunez,Agent_Laarni
+18,ACTIVE,HTSS100113,Xavier Reyes Villanueva,XAVIER,SPV_2,Xavier Reyes Villanueva,Agent_Xavier
+19,ACTIVE,HTSS100121,Maria Angelica Domantay Bobier Domantay,MARIA,INACTIVE,Maria Angelica Domantay Bobier Domantay,Agent_Maria
+20,ACTIVE,HTSS100129,Kenneth Rojas Torrefiel,KENNETH,SPV_7,Kenneth Rojas Torrefiel,Agent_Kenneth
+21,ACTIVE,HTSS100131,Louie Manuel Alo,LOUI_ALO,SPV_5,Louie Manuel Alo,Agent_Louie_Alo
+22,ACTIVE,HTSS100137,Justin Calopez Sadoguio,JUSTIN,SPV_5,Justin Calopez Sadoguio,Agent_Justin
+23,ACTIVE,HTSS100140,Jayke Junior Pechon Amistoso,JAYKE,SPV_7,Jayke Junior Pechon Amistoso,Agent_Jayke_Junior
+24,ACTIVE,HTSS100144,Rhoan Fernando,RHOAN,SPV_7,Rhoan Fernando,Agent_Rhoan
+25,ACTIVE,HTSS100146,JT GALIT,JT,SPV_5,Jt Galit,Agent_JT
+26,ACTIVE,HTSS100149,Jastine Joyce Cagasan Perillo,JASTINE_JO,QA,Jastine Joyce Cagasan Perillo,Agent_Jastine_Jouce
+27,ACTIVE,HTSS100152,Francheska Bulante Aquino,FRANCHESKA,SPV_5,Francheska Bulante Aquino,Agent_Francheska
+28,INACTIVE,HTSS100156,Jayson Nicolas,JAYSON,SPV_8,Jayson Nicolas,Agent_Jayson
+29,INACTIVE,HTSS100157,Rea Angelyn Guerrero,REA_ANGELYN,SPV_5,Rea Angelyn Guerrero,Agent_Rea_Angelyn
+30,ACTIVE,HTSS100168,Bea Rose Cantanilla Gutierrez,BEA,SPV_3,Bea Rose Cantanilla Gutierrez,Agent_BEA_ROSE
+31,ACTIVE,HTSS100169,Nikkalyn De Villa Hernandez,NIKKALYN,SPV_7,Nikkalyn De Villa Hernandez,Agent_NIKKALYN
+32,ACTIVE,HTSS100170,Sam De Villa Hernandez,SAM_HER,SPV_5,Sam De Villa Hernandez,Agent_SAM_HERNANDEZ
+33,ACTIVE,HTSS100174,Marisa Bustaliño Palon,MARISA,SPV_7,Marisa Bustaliño Palon,Agent_MARISA
+34,ACTIVE,HTSS100175,Joy Casipit Sabeniano,JOY,SPV_7,Joy Casipit Sabeniano,Agent_JOY
+35,ACTIVE,HTSS100188,Keith Harold Amtisoda Baltazar,KEITH,-,Keith Harold Amtisoda Baltazar,Agent_KEITH_HAROLD_BALTAZAR
+36,ACTIVE,HTSS100193,Rafael Robea Batoy,RAFAEL,-,Rafael Robea Batoy,Agent_RAFAEL_BATOY
+37,ACTIVE,HTSS100194,Rose Jean Fermo Bellezo,ROSE_JEAN,SPV_7,Rose Jean Fermo Bellezo,Agent_ROSE_JEAN_BELLEZO
+38,ACTIVE,HTSS100198,Jane Alingcastre,JANE,SPV_7,Jane Alingcastre,Agent_JANE_ALINGCASTRE
+39,ACTIVE,HTSS100204,Concepcion Bassig,CONCEPCION,SPV_8,Concepcion Bassig,Agent_Concepcion_Bassig
+40,ACTIVE,HTSS100205,Gemma Cantos,GEMMA,SPV_8,Gemma Cantos,Agent_Gemma_Cantos
+41,ACTIVE,HTSS100207,Justine Morada,JUSTINE_M,SPV_2,Justine Morada,Agent_Justine_Morada
+42,ACTIVE,HTSS100208,Benjie Mosico,BENJIE,SPV_7,Benjie Mosico,Agent_Benjie_Mosico
+43,ACTIVE,HTSS100209,Emirose Noche,EMIROSE,-,Emirose Noche,Agent_Emirose_Noche
+44,ACTIVE,HTSS100210,Jade Renzie Pamor,JADE,SPV_7,Jade Renzie Pamor,Agent_Jade_Renzie_Pamor
+45,ACTIVE,HTSS100211,Chona Rivera,CHONA,SPV_6,Chona Rivera,Agent_Chona_Rivera
+46,ACTIVE,HTSS100212,Roy Vergara,ROY,SPV_7,Roy Vergara,Agent_Roy_Vergara
+47,ACTIVE,HTSS100214,Mark Julius Epan Lanwang,MARK_JULIUS,DIGITAL,Mark Julius Epan Lanwang,Agent_Mark_Julius_Langwa
+48,ACTIVE,HTSS100217,Zarah Grace Lontoc Pagkalinawan,ZARAH,SPV_2,Zarah Grace Lontoc Pagkalinawan,Agent_Zarah_Grace_Pagkalinawan
+49,ACTIVE,HTSS100218,Jaimer Ablao Ramos,JAMIER,TL,Jaimer Ablao Ramos,Agent_Jamier_Ramos
+50,ACTIVE,HTSS100219,Junmel Sarmiento,JUNMEL,SPV_7,Junmel Sarmiento,Agent_Junmel_Sarmiento
+51,ACTIVE,HTSS100221,Evelyn Lauron Trupa,EVELYN,SPV_7,Evelyn Lauron Trupa,Agent_Evelyn_Trupa
+52,ACTIVE,HTSS100048,Abraham Fulgencio Tanaliga,ABRAHAM,SPV_3,Abraham Fulgencio Tanaliga,Agent_Abraham
+53,ACTIVE,HTSS100226,Cheska Anis Dela Cruz,CHESKA,SPV_2,Cheska Anis Dela Cruz,Agent_Cheska_Dela_Cruz
+54,ACTIVE,HTSS100229,Reymar Dela cruz,REYMAR,SPV_5,Reymar Dela Cruz,Agent_Reymar_Dela_Cruz
+55,ACTIVE,HTSS100237,May Potot Jimenez,MAY,SPV_5,May Potot Jimenez,Agent_May_Jimenez
+56,ACTIVE,HTSS100056,Mary Grace Blancaflor,MARY_GRACE,SPV_6,Mary Grace Blancaflor,Agent_Mary_Grace_Blancaflor
+57,ACTIVE,HTSS100230,Rosela Ferreras,ROSELA,SPV_8,Rosela Ferreras,Agent_Rosela_Ferreras
+58,ACTIVE,HTSS100231,Rensy Ibatuan,RENSY,SPV_7,Rensy Ibatuan,Agent_Rensy_Ibatuan
+59,ACTIVE,HTSS100232,Shennel Madio,SHENNEL,SPV_6,Shennel Madio,Agent_Shennel_Madio
+60,ACTIVE,HTSS100233,Mark Felix Pamittan,MARK_FELIX,SPV_6,Mark Felix Pamittan,Agent_Mark_Felix_Pamittan
+61,ACTIVE,HTSS100243,Sheena Godmalin,SHEENA,SPV_7,Sheena Godmalin,Agent_Sheena_Godmalin
+62,ACTIVE,HTSS100246,Paul Alexis Valenzuela,PAUL,SPV_8,Paul Alexis Valenzuela,Agent_Paul_Alexis_Valenzuela
+63,ACTIVE,HTSS100259,John Rodriguez,JOHN,SPV_3,John Rodriguez,Agent_John_Rodriguez
+64,ACTIVE,HTSS100247,Hanna Yeabel Bordamonte,HANNA,SPV_2,Hanna Yeabel Bordamonte,Agent_Hanna_Bordamonte
+65,ACTIVE,HTSS100252,Jhomar Geronimo,JHOMAR,SPV_5,Jhomar Geronimo,Agent_Jhomar_Geronimo
+66,ACTIVE,HTSS100253,Jesmer Jocson,JESMER,SPV_8,Jesmer Jocson,Agent_Jesmer_Jocson
+67,ACTIVE,HTSS100255,Reynald Pancho,REYNALD,SPV_6,Reynald Pancho,Agent_Reynald_Pancho
+68,ACTIVE,HTSS100258,Gina Reyes,GINA,DIGITAL,Gina Reyes,Agent_Gina_Reyes
+69,ACTIVE,HTSS100249,Danica Dumas,DANICA,SPV_6,Danica Dumas,Agent_Danica_Dumas
+70,ACTIVE,HTSS100256,Crisanta Pioquinto,CRISANTA,DIGITAL,Crisanta Pioquinto,Agent_Crisanta_Pioquinto
+71,ACTIVE,HTSS100257,Jeric Reyes,JERIC,FIELD,Jeric Reyes,#N/A
+72,ACTIVE,HTSS100273,Jean Rey Sabino,JEAN_REY,SPV_2,Jean Rey Sabino,AGENT_JEAN_REY_SABINO
+73,ACTIVE,HTSS100269,Samuel Godoy,SAMUEL,SPV_7,Samuel Godoy,AGENT_SAMUEL_GODOY
+74,ACTIVE,HTSS100274,Mark Loren Santos,MARK_L,SPV_7,Mark Loren Santos,AGENT_MARK_LOREN_SANTOS
+75,ACTIVE,HTSS100261,Denver Amada,DENVER,SPV_7,Denver Amada,AGENT_DENVER_AMADA
+76,ACTIVE,HTSS100267,Cris June Endrado,CRIS_J,-,Cris June Endrado,AGENT_CRIS_JUNE_ENDRADO
+77,ACTIVE,HTSS100268,Ronald Go,RONALD,SPV_7,Ronald Go,AGENT_RONALD_GO
+78,ACTIVE,HTSS100271,Centenniel Paul Manalo,CENTENNIEL,SPV_6,Centenniel Paul Manalo,AGENT_CENTENNIEL_PAUL_MANALO
+79,ACTIVE,HTSS100263,Cejay Arias,CEJAY,SPV_7,Cejay Arias,AGENT_CEJAY_ARIAS
+80,ACTIVE,HTSS100262,Maricel Arevalo,MARICEL_A,SPV_2,Maricel Arevalo, 
+81,ACTIVE,HTSS100272,Sandra Oliver,SANDRA,SPV_2,Sandra Oliver,AGENT_SANDRA_OLIVER
+82,ACTIVE,HTSS100266,Marianne Joy Canciller,MARIANNE,SPV_7,Marianne Joy Canciller,AGENT_MARIANNE_JOY_CANCILLER
+83,ACTIVE,HTSS100275,Mccoy Santos,MCCOY,SPV_7,Mccoy Santos,AGENT_MCCOY_SANTOS
+84,ACTIVE,HTSS100286,MIKAELLA PATUAL,MIKAELLA,SPV_8,Mikaella Patual,Agent_MIKAELLA _PATUAL
+85,ACTIVE,HTSS100284,CHARLES JAYSON LUCENIO,CHARLES,SPV_5,Charles Jayson Lucenio,Agent_CHARLES_JAYSON_LUCENIO
+86,ACTIVE,HTSS100282,SELWYN DIESEL FABIAN,SELWYN,-,Selwyn Diesel Fabian,Agent_SELWYN_DIESEL_FABIAN
+87,ACTIVE,HTSS100279,JOHN MICHAEL CANAM,JOHN_M,SPV_5,John Michael Canam,Agent_JOHN MICHAEL_CANAM
+88,ACTIVE,HTSS100281,SOFIA MAE EMATA,SOFIA,SPV_8,Sofia Mae Emata,Agent_SOFIA_MAE_EMATA
+89,ACTIVE,HTSS100288,LOLITA TEVES,LOLITA,SPV_6,Lolita Teves,Agent_LOLITA_TEVES
+90,ACTIVE,HTSS100285,CORAZON PALERMO,CORAZON,SPV_7,Corazon Palermo,Agent_CORAZON_PALERMO
+91,ACTIVE,HTSS100277,JUSTINE ABAD,JUSTINE_A,SPV_8,Justine Abad,Agent_JUSTINE_ABAD
+92,ACTIVE,HTSS100307,Albert Orlina,ORLINA,SPV_7,Albert Orlina,Agent_Orlina
+93,ACTIVE,HTSS100301,Ashlie Makabenta,ASHLIE,SPV_4,Ashlie Makabenta,Agent_Ashlie
+94,ACTIVE,HTSS100297,Desiree Guiling,DESIREE,-,Desiree Guiling,Agent_Desiree
+95,ACTIVE,HTSS100302,Diana Makabenta,DIANA,SPV_6,Diana Makabenta,Agent_Diana_Joy
+96,ACTIVE,HTSS100311,Henilyn Velano,HENILYN,-,Henilyn Velano,Agent_Henilyn
+97,ACTIVE,HTSS100306,Jayzel Nobleza,JAYZEL,SPV_8,Jayzel Nobleza,Agent_Jayzel
+98,ACTIVE,HTSS100292,John Kevin ,KEVIN,SPV_5,John Kevin ,Agent_Kevin
+99,ACTIVE,HTSS100299,JOMAR HIGINO,JOMAR,SPV_2,Jomar Higino,Agent_Jomar
+100,ACTIVE,HTSS100294,Laurence Camposano,LAURENCE,-,Laurence Camposano,Agent_Laurence
+101,ACTIVE,HTSS100310,Angelica Roslin,ROSLIN,SPV_8,Angelica Roslin,Agent_Roslin
+102,ACTIVE,HTSS100298,Marjorie General,MARJORIE,SPV_6,Marjorie General,Agent_Marjorie
+103,ACTIVE,HTSS100296,Lester Embana,EMBANA,-,Lester Embana,Agent_Embana
+104,ACTIVE,HTSS100308,Mary Ann Piando,PIANDO,SPV_7,Mary Ann Piando,Agent_Piando
+105,ACTIVE,HTSS100291,Roxanne Appid,ROXANNE,-,Roxanne Appid,Agent_Roxanne
+106,ACTIVE,HTSS100305,Sheila May Nim,SHEILA,-,Sheila May Nim,Agent_Sheila
+107,ACTIVE,HTSS100314,BUENALYN BENITEZ,BUENALYN,SPV_8,Buenalyn Benitez,Agent_Buenalyn
+108,ACTIVE,HTSS100317,JUNE EDWARD CARPIO,EDWARD,SPV_5,June Edward Carpio,Agent_edward
+109,ACTIVE,HTSS100323,RHIOROSE MANLANGIT,RHIOROSE,SPV_7,Rhiorose Manlangit,Agent_Rhiorose
+110,ACTIVE,HTSS100312,EZEKIEL ALISASIS,EZEKIEL,SPV_8,Ezekiel Alisasis,Agent_Ezekiel
+111,ACTIVE,HTSS100326,FEBE GRACE ALMOCERA,FEBE,SPV_2,Febe Grace Almocera,Agent_Febe_Grace
+112,ACTIVE,HTSS100327,JENEL BOCAL,JENEL,SPV_5,Jenel Bocal,Agent_Jenel
+113,ACTIVE,HTSS100328,JULBAN BUTLANGAN,JULBAN,-,Julban Butlangan,Agent_Julban
+114,ACTIVE,HTSS100333,ANGIELOU VELASCO,ANGIELOU,-,Angielou Velasco,Agent_Angielou
+115,ACTIVE,HTSS100332,JEROME JAVELLANA,JEROME,SPV_2,Jerome Javellana,Agent_Jerome_Javellana
+116,ACTIVE,HTSS100319,JEAN MARIE GONZALES,JEAN_MARIE,SPV_8,Jean Marie Gonzales,Agent_Jean_Marie
+117,ACTIVE,HTSS100313,JENROSE BELLEZO,JENROSE,SPV_8,Jenrose Bellezo,Agent_jenrose
+118,ACTIVE,HTSS100316,DHIMPOL BORILLO,DHIMPOL,SPV_3,Dhimpol Borillo,Agent_Dhimpol
+119,ACTIVE,HTSS100324,DANIEL MANLAPAZ,DANIEL,SPV_6,Daniel Manlapaz,Agent_Daniel
+120,ACTIVE,HTSS100320,MARIA CECILLA JACOB,CECILIA,SPV_8,Maria Cecilla Jacob,Agent_cecilia
+121,ACTIVE,HTSS100321,CASHLYN LANON,CASHLYN,SPV_8,Cashlyn Lanon,Agent_Cashlyn
+122,ACTIVE,HTSS100329,JOANNA MAE CARILLO,JOANNA,SPV_7,Joanna Mae Carillo,Agent_Joanna_Mae
+123,ACTIVE,HTSS100330,KURT ASHER GALAMITON,KURT,-,Kurt Asher Galamiton,Agent_Kurt_asher
+124,ACTIVE,HTSS100331,JOSE MARI GERVACIO,JOSE,SPV_8,Jose Mari Gervacio,Agent_Jose_mari
+125,ACTIVE,HTSS100334,Edward Alar,EDWARD_FIELD,FIELD,Edward Alar,#N/A
+126,ACTIVE,HTSS100335,Maila Almenario,MAILA,SPV_6,Maila Almenario,Agent_Maila
+127,ACTIVE,HTSS100336,Joanne Boiser,JOANNE,-,Joanne Boiser,Agent_Joanne
+128,ACTIVE,HTSS100337,Jenny Rose Cabujoc,JENNY,SPV_2,Jenny Rose Cabujoc,Agent_Jenny_rose
+129,ACTIVE,HTSS100338,Froilan Cruel,FROILAN,SPV_2,Froilan Cruel,Agent_Froilan
+130,ACTIVE,HTSS100339,Justine Milbert De Guzman,JUSTINE_MILBERT,SPV_4,Justine Milbert De Guzman,Agent_Justine_Milbert
+131,ACTIVE,HTSS100340,Rodwell Glico,RODWELL,SPV_8,Rodwell Glico,Agent_Rodwell
+132,ACTIVE,HTSS100341,Ella Mae Maanding,ELLA,SPV_2,Ella Mae Maanding,Agent_Ella_Mae
+133,ACTIVE,HTSS100342,Kristina Marie Manansala,KRISTINA,SPV_5,Kristina Marie Manansala,Agent_Kristina_Marie
+134,ACTIVE,HTSS100343,Diana Elizabeth Punay,DIANA_ELIZABETH,SPV_8,Diana Elizabeth Punay,Agent_Diana_Elizabeth
+135,ACTIVE,HTSS100344,Wilfredo Molina,JAY,FIELD,Wilfredo Molina,NA
+136,ACTIVE,HTSS100345,Kamilla Reyes,KAMILLA,SPV_8,Kamilla Reyes,Agent_Kamilla
+137,ACTIVE,HTSS100346,Pamela Dennese Sarmiento,PAMELA,SPV_7,Pamela Dennese Sarmiento,Agent_Pamela_Dennese
+138,ACTIVE,HTSS100347,Paul Emmanuel Senar,PAUL_E,SPV_7,Paul Emmanuel Senar,Agent_Paul_Emmanuel
+139,ACTIVE,HTSS100348,Mark Siman,SIMAN,SPV_8,Mark Siman,Agent_Mark_Siman
+140,ACTIVE,HTSS100349,Marianne Jamaicah Taule,JAMAICAH,-,Marianne Jamaicah Taule,Agent_Marianne_Jamaicah
+141,ACTIVE,HTSS100350,Steben Algabre Abile,STEBEN,SPV_2,Steben Algabre Abile,Agent_Steben
+142,ACTIVE,HTSS100351,Lyka Joy Dumduman Alondra,LYKA_JOY,SPV_8,Lyka Joy Dumduman Alondra,Agent_Lyka_Joy
+143,ACTIVE,HTSS100352,Maricel Misagal Callueng,MARICEL_M,SPV_5,Maricel Misagal Callueng,Agent_Maricel_Callueng
+144,ACTIVE,HTSS100353,Sheyne April Apo Custodio,SHEYNE,SPV_5,Sheyne April Apo Custodio,Agent_Sheyne_April
+145,ACTIVE,HTSS100354,Christian Ramirez Dajalos,CHRISTIAN,-,Christian Ramirez Dajalos,Agent_Dajalos
+146,ACTIVE,HTSS100355,Carmela Apo Dalida,CARMELA,SPV_2,Carmela Apo Dalida,Agent_Carmela
+147,ACTIVE,HTSS100356,Ma. Althea Palivino Diadid,ALTHEA,SPV_5,Ma. Althea Palivino Diadid,Agent_Ma_Althea
+148,ACTIVE,HTSS100357,Cindy-lynne Valenzuela Fabunan,CINDY,-,Cindy-Lynne Valenzuela Fabunan,Agent_Cindy_Lynne
+149,ACTIVE,HTSS100358,Andre Pete Ruiz Flores,ANDRE,SPV_8,Andre Pete Ruiz Flores,Agent_Andre_Pete
+150,ACTIVE,HTSS100359,Kathleen Gines,KATHLEEN,SPV_8,Kathleen Gines,Agent_Kathleen
+151,ACTIVE,HTSS100360,Bernard Mallen Hatulan,BERNARD,SPV_8,Bernard Mallen Hatulan,Agent_Bernard
+152,ACTIVE,HTSS100361,Benjamin Tomas Ladera,BENJAMIN_T,SPV_1,Benjamin Tomas Ladera,Agent_Benjamin_Ladera
+153,ACTIVE,HTSS100300,Alexis Joy Ladera Lozano,ALEXIS,SPV_6,Alexis Joy Ladera Lozano,Agent_Alexis_Joy
+154,ACTIVE,HTSS100362,Germain Joy Corong Makabenta,GERMAIN,SPV_1,Germain Joy Corong Makabenta,Agent_Germain_Joy
+155,ACTIVE,HTSS100363,April Mi-Ot,APRIL,SPV_7,April Mi-Ot,Agent_April
+156,ACTIVE,HTSS100364,Melody Silot Pasiderio,MELODY,SPV_2,Melody Silot Pasiderio,Agent_Melody
+157,ACTIVE,HTSS100365,Jaryl Andrei Reontaso Rodelas,JARYL,SPV_4,Jaryl Andrei Reontaso Rodelas,Agent_Jaryl_Andrei
+158,ACTIVE,HTSS100366,David Tardio,DAVID,SPV_2,David Tardio,Agent_David
+159,ACTIVE,HTSS100367,Richard Simon Ong Taway,RICHARD,SPV_2,Richard Simon Ong Taway,Agent_Richard_Simon
+160,ACTIVE,HTSS100368,Virgilio Baligasa Jr. Yumul,VIRGILIO,SPV_2,Virgilio Baligasa Jr. Yumul,Agent_Virgilio_Jr
+161,ACTIVE,HTSS,Mariel Bernabe,MARIEL_B,SPV_5,Mariel Bernabe,Agent_Mariel_Bernabe
+162,ACTIVE,HTSS,Jennifer Catacutan,CATACUTAN,SPV_5,Jennifer Catacutan,Agent_Jennifer_Catacutan
+163,ACTIVE,HTSS,Ismaila Constante,ISMAILA,SPV_2,Ismaila Constante,Agent_Maricel_Ismaila
+164,ACTIVE,HTSS,Melvin Amian Edar,MELVIN,SPV_5,Melvin Amian Edar,Agent_Melvin_Amian
+165,ACTIVE,HTSS,Marites Fabro,MARTES,-,Marites Fabro,Agent_Martes_Fabro
+166,ACTIVE,HTSS,Angelica Acierda,ANGELICA,-,Angelica Acierda,Agent_Angelica_Acierda
+167,ACTIVE,HTSS,Bryan Bernal,BRYAN,SPV_8,Bryan Bernal,Agent_Bryan_Bernal
+168,ACTIVE,HTSS,Ryan Jay Calabia,RYAN,SPV_2,Ryan Jay Calabia,Agent_Ryan_Jay
+169,ACTIVE,HTSS,Meg Lloyd Francisco,MEG,SPV_5,Meg Lloyd Francisco,Agent_Meg_Lloyd
+170,ACTIVE,HTSS,Ma. Josefa Dennielene Ignacio,JOSEFA,SPV_2,Ma. Josefa Dennielene Ignacio,Agent_Josefa
+171,ACTIVE,HTSS,Gian Carlo Macul,GIAN_CARLO,SPV_1,Gian Carlo Macul,Agent_Gian_Carlo
+172,ACTIVE,HTSS,Ralf Brian Gatos Montilla,RALF,SPV_4,Ralf Brian Gatos Montilla,Agent_Ralf_Brian
+173,ACTIVE,HTSS100382,Ariel Zabala,ARIEL,SPV_2,Ariel Zabala,Agent_Ariel
+174,ACTIVE,HTSS,Carissa Mekaela Unabia,CARISSA,SPV_7,Carissa Mekaela Unabia,Agent_Carissa_Mekaela
+175,ACTIVE,HTSS,GUEVARRA MELANIE,MELANIE,SPV_3,Guevarra Melanie,Agent_Melanie
+176,ACTIVE,HTSS,HALIMAO KRISSANE MICHAELA,KRISSANE,SPV_3,Halimao Krissane Michaela,Agent_Krissane
+177,ACTIVE,HTSS,HERNANDEZ ARLYN,ARLYN,SPV_8,Hernandez Arlyn,Agent_Arlyn
+178,ACTIVE,HTSS,JOSON FRANCO,FRANCO,SPV_7,Joson Franco,Agent_Franco
+179,ACTIVE,HTSS,MAMENG JUDY ANN,JUDY_ANN,SPV_1,Mameng Judy Ann,Agent_Judy_Ann
+180,ACTIVE,HTSS,MERCENE ANALUZ,ANALUZ,SPV_2,Mercene Analuz,Agent_Analuz
+181,ACTIVE,HTSS,PATUAL NJ MAE,NJ_MAE,SPV_7,Patual Nj Mae,Agent_Nj_Mae
+182,ACTIVE,HTSS,RETILBA RESURRECCION,RESURRECCION,SPV_7,Retilba Resurreccion,Agent_Resurreccion
+183,ACTIVE,HTSS,ROMANTICO WILBERT,WILBERT,SPV_2,Romantico Wilbert,Agent_Wilbert
+184,ACTIVE,HTSS,VIRGO RUBY,RUBY,SPV_7,Virgo Ruby,Agent_Ruby
+185,ACTIVE,HTSS,GAREZA REAGAN,REAGAN,SPV_5,Gareza Reagan,Agent_Gareza_Reagan
+186,ACTIVE,HTSS,"NUAL, GHENBERT",GHENBERT,SPV_5,"Nual, Ghenbert",Agent_Nual_GhenBert
+187,ACTIVE,HTSS,"PATULAN,BERNABE",BERNABE,SPV_3,"Patulan,Bernabe",Agent_Patulan_Bernabe
+188,ACTIVE,HTSS,"REYES, RODEL JR.",RODEL,SPV_8,"Reyes, Rodel Jr.",Agent_Reyes_Rodel
+189,ACTIVE,HTSS,"RIMA, MICAH ANDREA",MICAH,SPV_5,"Rima, Micah Andrea",Agent_Rima_Micah
+190,ACTIVE,HTSS,"ROMERO, MARIA CRISTINE",ROMERO,SPV_5,"Romero, Maria Cristine",Agent_Romero_Maria
+191,ACTIVE,HTSS,"URETA, ABEGAIL",ABEGAIL,SPV_5,"Ureta, Abegail",Agent_Ureta_Abegail
+192,ACTIVE,HTSS,"VILLACURA, KENNETH RUSSEL",VILLACURA,SPV_2,"Villacura, Kenneth Russel",Agent_Villacura_Kenneth
+193,ACTIVE,HTSS,"JUDIMO, CARL CYROME",JUDIMO,SPV_1,"Judimo, Carl Cyrome",Agent_Judimo_Carl
+194,ACTIVE,HTSS,"MASAOAY, JESSIE V.",JESSIE,SPV_1,"Masaoay, Jessie V.",Agent_Masaoay_Jessie
+195,ACTIVE,HTSS,"MOJENO, BIEN LOUIE",BIEN,SPV_4,"Mojeno, Bien Louie",Agent_Mojeno_Bien
+196,ACTIVE,HTSS,"SENADO, REN-REN",REN,SPV_4,"Senado, Ren-Ren",Agent_Senado_Ren
+197,ACTIVE,HTSS,"TOLENTINO, MAYLA MARAVILLAS",MAYLA,SPV_4,"Tolentino, Mayla Maravillas",Agent_Tolentino_Mayla
+198,ACTIVE,HTSS,"VILLAFLOR, ANGEL",ANGEL,SPV_4,"Villaflor, Angel",Agent_Villaflor_Angel
+199,ACTIVE,HTSS,"ABANA, MARK JOSEPH",ABANA,SPV_1,"Abana, Mark Joseph",Agent_Abana_Mark
+200,ACTIVE,HTSS,"AMOROSO, SHAIRA AMOR",AMOROSO,SPV_5,"Amoroso, Shaira Amor",Agent_Amoroso_Shaira
+201,ACTIVE,HTSS,"BULALACAO, LEHNARD",LEHNARD,SPV_3,"Bulalacao, Lehnard",Agent_Bulalacao_Lehnard
+202,ACTIVE,HTSS,"CUEVAS, DIVINE GRACE",DIVINE,SPV_1,"Cuevas, Divine Grace",Agent_Cuevas_Divine
+203,ACTIVE,HTSS,"ERFE, MYLENE",ERFE,SPV_1,"Erfe, Mylene",Agent_Erfe_Mylene
+204,ACTIVE,HTSS,"OBENG, MERRY GRACE",OBENG,SPV_4,"Obeng, Merry Grace",Agent_Obeng_Merry
+205,ACTIVE,HTSS,"PAYUMO, JANELLE ANN",PAYUMO,SPV_4,"Payumo, Janelle Ann",Agent_Payumo_Janelle
+206,ACTIVE,HOUSE,HOUSE_9,HOUSE_9,SPV_9,House_9,#N/A
+207,ACTIVE,HTSS,"Barranco, Aiko",AIKO,SPV_4,"Barranco, Aiko",Agent_Aiko
+208,ACTIVE,HTSS,"Bautista, Lemuel",LEMUEL,SPV_1,"Bautista, Lemuel",Agent_Lemuel
+209,ACTIVE,HTSS,"Canada, Ryan Christian",RYAN_C,SPV_4,"Canada, Ryan Christian",Agent_Ryan_Christian
+210,ACTIVE,HTSS,"Dalag, Jennifer",DALAG,SPV_3,"Dalag, Jennifer",Agent_Dalag_Jennifer
+211,ACTIVE,HTSS,"Ege, Jeffrey",EGE,SPV_1,"Ege, Jeffrey",Agent_Ege_Jeffrey
+212,ACTIVE,HTSS,"Eulalio, Abegail Mary",ABEGAIL_M,SPV_4,"Eulalio, Abegail Mary",Agent_Abegail_Mary
+213,ACTIVE,HTSS,"Fernandez, Daniel David",DANIEL_D,SPV_3,"Fernandez, Daniel David",Agent_Daniel_David
+214,ACTIVE,HTSS,"Liday, Seychelle Ann",SEYCHELLE,SPV_1,"Liday, Seychelle Ann",Agent_Seychelle_Ann
+215,ACTIVE,HTSS,"Lim, Jeffrey",LIM,SPV_1,"Lim, Jeffrey",Agent_Lim_Jeffrey
+216,ACTIVE,HTSS,"Mojica, Steven Kate",STEVEN,SPV_3,"Mojica, Steven Kate",Agent_Steven_Kate
+217,ACTIVE,HTSS,"Mulano, Kimberly",MULANO,SPV_3,"Mulano, Kimberly",Agent_Mulano_Kimberly
+218,ACTIVE,HTSS,"Nueva, Jenny",NUEVA,SPV_3,"Nueva, Jenny",Agent_Nueva_Jenny
+219,ACTIVE,HTSS,"Raquel, Vanessa Mae",VANESSA,SPV_3,"Raquel, Vanessa Mae",Agent_Vanessa_Mae
+220,ACTIVE,HTSS,"Andaya,Wilmar",WILMAR,SPV_7,"Andaya,Wilmar",Agent_Wilmar_Andaya
+221,ACTIVE,HTSS,"Bernilla, Rommel",ROMMEL,SPV_7,"Bernilla, Rommel",Agent_Rommel_Bernilla
+222,ACTIVE,HTSS,"Catubuan, Vannesa Mae",VANNESA,SPV_7,"Catubuan, Vannesa Mae",Agent_Vannesa Mae
+223,ACTIVE,HTSS,"Diaz, Lei Anne Marie",LEI,SPV_7,"Diaz, Lei Anne Marie",Agent_Lei_Anne_Marie
+224,ACTIVE,HTSS,"Fernandez, Alex Vincene",ALEX_V,SPV_7,"Fernandez, Alex Vincene",Agent_Alex Vincene
+225,ACTIVE,HTSS,"Garcia, Jade Joshua",JADE_J,SPV_7,"Garcia, Jade Joshua",Agent_Jade_Joshua
+226,ACTIVE,HTSS,"Llena, Krisha",KRISHA_L,SPV_7,"Llena, Krisha",Agent_Krisha_Llena
+227,ACTIVE,HTSS,"Marzan, John Luigi",JOHN_L,SPV_7,"Marzan, John Luigi",Agent_John Luigi
+228,ACTIVE,HTSS,"Mondejar, Jaymar",JAYMAR,SPV_7,"Mondejar, Jaymar",Agent_ Jaymar_Mondejar
+229,ACTIVE,HTSS,"Ortiz, Marry Joy",MARRY,SPV_9,"Ortiz, Marry Joy",Agent_ Marry_Joy_Ortiz
+230,ACTIVE,HTSS,"Ramos, Sarah Mae",SARAH,SPV_9,"Ramos, Sarah Mae",Agent_Sarah_Mae_Ramos
+231,ACTIVE,HTSS,"Toledo, Jhunras",JHUNRAS,SPV_9,"Toledo, Jhunras",Agent_Jhunras_Toledo
+232,ACTIVE,HTSS,"Valencia,Ara",ARA,SPV_9,"Valencia,Ara",Agent_Ara_Valencia
+233,ACTIVE,HOUSE,HOUSE_10,HOUSE_10,SPV_10,House_10,#N/A
+234,ACTIVE,HTSS,RENE FIELD,RENE,FIELD,Rene Field,RENE FIELD
+235,ACTIVE,HTSS,"Arquilla, Catherine",ARQUILLA,SPV_9,"Arquilla, Catherine",Agent_Arquilla_Catherine
+236,ACTIVE,HTSS,"Asong, Mary Jane",ASONG,SPV_9,"Asong, Mary Jane",Agent_Asong_Mary Jane
+237,ACTIVE,HTSS,"Caasi,Vienloraine ",CAASI,SPV_9,"Caasi,Vienloraine ",Agent_Caasi_Vienloraine 
+238,ACTIVE,HTSS,"Flores, Leya",FLORES,SPV_9,"Flores, Leya",Agent_Flores_Leya
+239,ACTIVE,HTSS,"Jabeniao,Jorielyn",JABENIAO,SPV_9,"Jabeniao,Jorielyn",Agent_Jabeniao_Jorielyn
+240,ACTIVE,HTSS,"Obidos, Oliver",OBIDOS,SPV_9,"Obidos, Oliver",Agent_Obidos_Oliver
+241,ACTIVE,HTSS,"Palaypayon, Nica ",PALAYPAYON,SPV_9,"Palaypayon, Nica ",Agent_Palaypayon_Nica 
+242,ACTIVE,HTSS,"Sario, Lester",SARIO,SPV_9,"Sario, Lester",Agent_Sario_Lester
+243,ACTIVE,HTSS,Antonio Ortega,ANTONIO_FIELD,FIELD,Antonio Ortega,ANTONIO_FIELD
+244,ACTIVE,HTSS,John Rodriguez Escaran,JOHN_FIELD,FIELD,John Rodriguez Escaran,JOHN_FIELD
+245,ACTIVE,HTSS,"MAGCAWAS, EDRIAN",MAGCAWAS,SPV_1,"Magcawas, Edrian",Agent_Magcawas_Edrian
+246,ACTIVE,HTSS,"BORDDADO,RAYMUND",BORDDADO,SPV_1,"Borddado,Raymund",AGENT_BORDDADO_RAYMUND
+247,ACTIVE,HTSS,"SAONOY, AMELYN",SAONOY,SPV_5,"Saonoy, Amelyn",AGENT_SAONOY_AMELYN
+248,ACTIVE,HTSS,"Saycon, Romel",SAYCON,SPV_7,"Saycon, Romel",Agent_Saycon_Romel
+249,ACTIVE,HTSS,"Laurente, Jushua",LAURENTE,SPV_7,"Laurente, Jushua",Agent_Laurente_Jushua
+250,ACTIVE,HTSS,"Caranto, Edwin",CARANTO,SPV_7,"Caranto, Edwin",Agent_Caranto_Edwin
+251,ACTIVE,HTSS,"Ponciano, Christine Joy",PONCIANO,SPV_7,"Ponciano, Christine Joy",Agent_Ponciano_Christine
+252,ACTIVE,HTSS,"Tutor, Sydney",TUTOR,SPV_7,"Tutor, Sydney",Agent_Tutor_Sydney
+253,ACTIVE,HTSS,"Dela Pena, Helyn",DELA_PENA,SPV_7,"Dela Pena, Helyn",Agent_Dela_Pena_Helyn
+254,ACTIVE,HTSS,"De Roda, Mary Grace",DE_RODA,SPV_7,"De Roda, Mary Grace",Agent_De_Roda_Mary_Grace
+255,ACTIVE,HTSS,"Ramos, Giselle",RAMOS,SPV_7,"Ramos, Giselle",Agent_Ramos_Giselle
+256,ACTIVE,HTSS,"Barrera, Melanie",BARRERA,SPV_7,"Barrera, Melanie",Agent_Barrera_Melanie
+257,ACTIVE,HTSS,"SAUSA, GWEN",SAUSA,SPV_2,"Sausa, Gwen",Agent_Sausa_Gwen
+258,ACTIVE,HTSS,"SARUELO, CARLA",SARUELO,SPV_9,"Saruelo, Carla",Agent_Saruelo_Carla
+259,ACTIVE,HTSS,"OMOY, JOHN REY",OMOY,SPV_1,"Omoy, John Rey",Agent_Omoy_John_Rey
+260,ACTIVE,HTSS,"NAVARETTE, LOUELLA",NAVARETTE,SPV_7,"Navarette, Louella",Agent_Navarette_Louella
+261,ACTIVE,HTSS,"MINA, ANJO ROYO",MINA,SPV_7,"Mina, Anjo Royo","MINA, ANJO ROYO"
+262,ACTIVE,HTSS,"LUMAGOD, NERRY MEJIA",LUMAGOD,SPV_7,"Lumagod, Nerry Mejia","LUMAGOD, NERRY MEJIA"
+263,ACTIVE,HTSS,"CARGULLO, MARIA JOANNA",CARGULLO,SPV_2,"Cargullo, Maria Joanna","CARGULLO, MARIA JOANNA"
+264,ACTIVE,HTSS,"BASILIO, ANA LIZA",BASILIO,SPV_5,"Basilio, Ana Liza","BASILIO, ANA LIZA"
+266,ACTIVE,HTSS,"LAZARTE, CHARLOTTE",LAZARTE,SPV_5,"Lazarte, Charlotte",Agent_Lazarte
+267,ACTIVE,HTSS,"ACANTILADO, ANGELBHEL",ANGELBHEL,SPV_5,"Acantilado, Angelbhel","ACANTILADO, ANGELBHEL"
+268,ACTIVE,HTSS,"ADRIANO, USHER WESLEY",USHER,SPV_5,"Adriano, Usher Wesley","ADRIANO, USHER WESLEY"
+269,ACTIVE,HTSS,"ARQUILLA, ROSE MARIE",ROS,SPV_5,"Arquilla, Rose Marie","ARQUILLA, ROSE MARIE"
+270,ACTIVE,HTSS,"Rapharl, Marc",RAPHARL,SPV_5,"Rapharl, Marc","Rapharl, Marc"
+271,ACTIVE,HTSS,"Amaro, Nelbert",AMARO,SPV_5,"Amaro, Nelbert","Amaro, Nelbert"
+272,ACTIVE,HTSS,"Ancheta, Red Joshua",ANCHETA,SPV_5,"Ancheta, Red Joshua","Ancheta, Red Joshua"
+273,ACTIVE,HTSS,"Ardidon,Charles Joshua",ARDIDON,SPV_1,"Ardidon,Charles Joshua","Ardidon,Charles Joshua"
+274,ACTIVE,HTSS,"Arquilla, John Paul",JOHN_PAUL,SPV_5,"Arquilla, John Paul","Arquilla, John Paul"
+275,ACTIVE,HTSS,"Asuela, Kristine",ASUELA,SPV_5,"Asuela, Kristine","Asuela, Kristine"
+276,ACTIVE,HTSS,"Baris, Dickymar",BARIS,SPV_5,"Baris, Dickymar","Baris, Dickymar"
+277,ACTIVE,HTSS,"Bautista, John Paul",BAUTISTA,SPV_5,"Bautista, John Paul","Bautista, John Paul"
+278,ACTIVE,HTSS,"Bulalacao, Z-ya Ariza",BULALACAO,SPV_5,"Bulalacao, Z-Ya Ariza","Bulalacao, Z-ya Ariza"
+279,ACTIVE,HTSS,"Cadiete, Russel",CADIETE,SPV_5,"Cadiete, Russel","Cadiete, Russel"
+280,ACTIVE,HTSS,"Canbanada, Arnold Jr.",CANBANADA,SPV_5,"Canbanada, Arnold Jr.","Canbanada, Arnold Jr."
+281,ACTIVE,HTSS,"Canto, Marc Wilson",CANTO,SPV_5,"Canto, Marc Wilson","Canto, Marc Wilson"
+282,ACTIVE,HTSS,"Carriedo, Rio Grace",CARRIEDO,SPV_5,"Carriedo, Rio Grace","Carriedo, Rio Grace"
+283,ACTIVE,HTSS,"Cerdan, Maria Angelica",CERDAN,SPV_5,"Cerdan, Maria Angelica","Cerdan, Maria Angelica"
+284,ACTIVE,HTSS,"Consuelo, Jaibe Jarvin",CONSUELO,SPV_5,"Consuelo, Jaibe Jarvin","Consuelo, Jaibe Jarvin"
+285,ACTIVE,HTSS,"Cruz, Ana Clarissa",CRUZ,SPV_5,"Cruz, Ana Clarissa","Cruz, Ana Clarissa"
+286,ACTIVE,HTSS,"Dacian, Ruperto Jr.",DACIAN,SPV_5,"Dacian, Ruperto Jr.","Dacian, Ruperto Jr."
+287,ACTIVE,HTSS,"Dagohoy, Jay-R",DAGOHOY,SPV_5,"Dagohoy, Jay-R","Dagohoy, Jay-R"
+288,ACTIVE,HTSS,"Delleva, Lou Diamond",DELLEVA,SPV_5,"Delleva, Lou Diamond","Delleva, Lou Diamond"
+289,ACTIVE,HTSS,"Delos Reyes, Josephine",DELOS_R,SPV_5,"Delos Reyes, Josephine","Delos Reyes, Josephine"
+290,ACTIVE,HTSS,"Galera, Lovely Lajum",GALLERA,SPV_5,"Galera, Lovely Lajum","Galera, Lovely Lajum"
+291,ACTIVE,HTSS,"Guilas, Joshua",GUILAS,SPV_5,"Guilas, Joshua","Guilas, Joshua"
+292,ACTIVE,HTSS,"Llanto, Isagani",LLANTO,SPV_5,"Llanto, Isagani","Llanto, Isagani"
+293,ACTIVE,HTSS,"Lleno, Jimmy",LLENO,SPV_5,"Lleno, Jimmy","Lleno, Jimmy"
+294,ACTIVE,HTSS,"Maano, Stephanie",MAANO,SPV_5,"Maano, Stephanie","Maano, Stephanie"
+295,ACTIVE,HTSS,"Manuel, Paul Christian",MANUEL,SPV_5,"Manuel, Paul Christian","Manuel, Paul Christian"
+296,ACTIVE,HTSS,"Medequillo, Sherilyn",MEDEQUILLO,SPV_5,"Medequillo, Sherilyn","Medequillo, Sherilyn"
+297,ACTIVE,HTSS,"Mercado, Marjorie",MERCADO,SPV_5,"Mercado, Marjorie","Mercado, Marjorie"
+298,ACTIVE,HTSS,"Padre, Jhay- Ann",PADRE,SPV_5,"Padre, Jhay- Ann","Padre, Jhay- Ann"
+299,ACTIVE,HTSS,"Paez, Katrina",PAEZ,SPV_5,"Paez, Katrina","Paez, Katrina"
+300,ACTIVE,HTSS,"Permalino, Angeline",PERMALINO,SPV_5,"Permalino, Angeline","Permalino, Angeline"
+301,ACTIVE,HTSS,"Ramos, Ryan",RAMOS_R,SPV_5,"Ramos, Ryan","Ramos, Ryan"
+302,ACTIVE,HTSS,"Santos, Laiza Mae",SANTOS,SPV_5,"Santos, Laiza Mae","Santos, Laiza Mae"
+303,ACTIVE,HTSS,"Serrano, CJ",LAIZA,SPV_5,"Serrano, Cj","Serrano, CJ"
+304,ACTIVE,HTSS,"Sibog, Jeric",SERRANO,SPV_5,"Sibog, Jeric","Sibog, Jeric"
+305,ACTIVE,HTSS,"Maglinte, Rongie",RONGIE,SPV_5,"Maglinte, Rongie","Maglinte, Rongie"
+306,ACTIVE,HTSS,"MASCARINAS, FRENZ AILA",FRENZ,SPV_5,"Mascarinas, Frenz Aila","MASCARINAS, FRENZ AILA"
+308,ACTIVE,HTSS,"OBENG, MA.CRISTINA",CRISTINA,SPV_6,"Obeng, Ma.Cristina","OBENG, MA.CRISTINA"
+309,ACTIVE,HTSS,"GABAY, CRISPER AARON JAMES",CRISPER,SPV_6,"Gabay, Crisper Aaron James","GABAY, CRISPER AARON JAMES"
+310,ACTIVE,HTSS,"Baisa, Ma. Marrieta",BAISA,SPV_3,"Baisa, Ma. Marrieta","Baisa, Ma. Marrieta"
+311,ACTIVE,HTSS,"Brizo, John Bienverino",BRIZO,SPV_3,"Brizo, John Bienverino","Brizo, John Bienverino"
+312,ACTIVE,HTSS,"Colagbang, Jim John",COLAGBANG,SPV_3,"Colagbang, Jim John","Colagbang, Jim John"
+313,ACTIVE,HTSS,"Concepcion,Alvin",CONCEPCION_A,SPV_3,"Concepcion,Alvin","Concepcion,Alvin"
+314,ACTIVE,HTSS,"Demakiling, Jay Mark",DEMAKILING,SPV_3,"Demakiling, Jay Mark","Demakiling, Jay Mark"
+315,ACTIVE,HTSS,"Dizon, Anna Mae",DIZON,SPV_3,"Dizon, Anna Mae","Dizon, Anna Mae"
+316,ACTIVE,HTSS,"Duran, Mark Joseph",DURAN,SPV_3,"Duran, Mark Joseph","Duran, Mark Joseph"
+317,ACTIVE,HTSS,"Lopez, Alvin",LOPEZ_A,SPV_3,"Lopez, Alvin","Lopez, Alvin"
+318,ACTIVE,HTSS,"Mangoba, Raffonzel",MANGOBA_R,SPV_3,"Mangoba, Raffonzel","Mangoba, Raffonzel"
+319,ACTIVE,HTSS,"Mejia, Monica",MEJIA_M,SPV_3,"Mejia, Monica","Mejia, Monica"
+320,ACTIVE,HTSS,"Mondia, Andrea",MONDIA_A,SPV_3,"Mondia, Andrea","Mondia, Andrea"
+321,ACTIVE,HTSS,"Ortiz, Marry Jane",ORTIZ,SPV_3,"Ortiz, Marry Jane","Ortiz, Marry Jane"
+322,ACTIVE,HTSS,"Pena, Nica Mae",PENA,SPV_3,"Pena, Nica Mae","Pena, Nica Mae"
+323,ACTIVE,HTSS,"Santos, Aliza",SANTOS_A,SPV_3,"Santos, Aliza","Santos, Aliza"
+324,ACTIVE,HTSS,"Sarmiento, Randolph",SARMIENTO_R,SPV_3,"Sarmiento, Randolph","Sarmiento, Randolph"
+325,ACTIVE,HTSS,"Soliven, Vergillio",SOLIVEN,SPV_3,"Soliven, Vergillio","Soliven, Vergillio"
+326,ACTIVE,HTSS,"Somido, Jessa Mae",SOMIDO,SPV_3,"Somido, Jessa Mae","Somido, Jessa Mae"
+327,ACTIVE,HTSS,"Soriano, Maria Katherine",SORIANO,SPV_3,"Soriano, Maria Katherine","Soriano, Maria Katherine"
+328,ACTIVE,HTSS,"Soriano, Vernadette",SORIANO_V,SPV_3,"Soriano, Vernadette","Soriano, Vernadette"
+329,ACTIVE,HTSS,"Zapanta, Kimberly",ZAPANTA,SPV_3,"Zapanta, Kimberly","Zapanta, Kimberly"
+330,ACTIVE,HTSS,"FRAGAS, ANGELICA REIGNE",REIGN,SPV_7,"Fragas, Angelica Reigne","FRAGAS, ANGELICA REIGNE"
+331,ACTIVE,HTSS,"BLAQUERA, MARICAR",MARICAR,SPV_9,"Blaquera, Maricar","BLAQUERA, MARICAR"
+332,ACTIVE,HTSS,"GAY, JIMENEZ",GAY,SPV_6,"Gay, Jimenez","GAY, JIMENEZ"
+333,ACTIVE,HTSS,"DELA CRUZ, JOYCE ANNE",JOYCE,SPV_11,"Dela Cruz, Joyce Anne","DELA CRUZ, JOYCE ANNE"
+334,ACTIVE,HTSS,"LORILLA, ATHENA JUSTINE",ATHENA,SPV_2,"LORILLA, ATHENA JUSTINE","LORILLA, ATHENA JUSTINE"
+335,ACTIVE,HTSS,"AIDO, JUANITO",JUANITO,FIELD,"AIDO, JUANITO","AIDO, JUANITO"
