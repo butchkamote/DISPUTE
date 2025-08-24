@@ -21,7 +21,19 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">HTSS Payments</a>
+            <a class="navbar-brand" href="
+{%- if current_user.is_authenticated -%}
+    {%- if current_user.role == 'team_leader' -%}
+        {{ url_for('team_leader.data_entry') }}
+    {%- elif current_user.role == 'data_analyst' -%}
+        {{ url_for('data_analyst.campaign_filter') }}
+    {%- else -%}
+        {{ url_for('auth.login') }}
+    {%- endif -%}
+{%- else -%}
+    {{ url_for('auth.login') }}
+{%- endif -%}
+">HTSS Payments</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>

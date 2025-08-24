@@ -87,26 +87,23 @@ def export_campaign_data(campaign=None, start_date=None, end_date=None, include_
     data_dict = {}
     record_count = 0
     
-    # Create a summary sheet
+    # Create the summary data with the same column structure
     summary_data = []
     
+    # Process each campaign
     for campaign_name, campaign_records in campaigns.items():
         # Convert records to DataFrame
         df = pd.DataFrame(campaign_records)
         data_dict[campaign_name] = df
-        count = len(campaign_records)
-        record_count += count
+        record_count += len(campaign_records)
         
-        # Add to summary
-        summary_data.append({
-            'Campaign': campaign_name,
-            'Record Count': count,
-            'Total Amount': sum(r['Amount'] for r in campaign_records)
-        })
+        # Add all records to summary
+        summary_data.extend(campaign_records)
     
-    # Add summary sheet
-    summary_df = pd.DataFrame(summary_data)
-    data_dict['Summary'] = summary_df
+    # Create summary DataFrame with the same columns
+    if summary_data:
+        summary_df = pd.DataFrame(summary_data)
+        data_dict['Summary'] = summary_df
     
     # Generate filename
     if campaign:
